@@ -17,8 +17,8 @@ var db = new sqlite3.Database('totell.db');
 */
 
 //setting mongoDB as a database for the project
-var User=require('./user.js')
-var Restaurant=require('./restaurant.js')
+var User=require('./src/user.js')
+var Restaurant=require('./src/restaurant.js')
 var port = 3000;
 
 
@@ -27,7 +27,7 @@ app.listen(port, function(){
 });
 
 app.get('/', function(req,res){
-  res.send('Hello, You are on Totell now!')
+  res.redirect('/public/index.html')
 });
 
 
@@ -78,6 +78,7 @@ app.use('/addresturant', (req,res)=>{
         else{
             console.log(req.body.restName);
             console.log("record successfully saved")
+            res.send("resturant registered")
 
         }
     });
