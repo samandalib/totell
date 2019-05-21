@@ -597,7 +597,14 @@
                     ];
       let resturants = [
           {name:"rivas",
-           location:"Austin,Tx",
+           country: "usa",
+           city:"Austin,Tx",
+           address: "",
+           phone:"",
+           website:"",
+           email:"",
+           owner:"",
+
            menus:[{category:"Pizza",
                 items:[{image: "http://placehold.it/120x120&text=image1", name: "Pepperoni Pizza", ingredients:["bread","sausage","ketchup"], currency:"USD", price:"10", langs:['en','fr','pt']},
                         {image: "http://placehold.it/120x120&text=image1",name: "Bolonezia Pizza", ingredients:["bread","meat","vegetables"], currency:"USD",price:"15", langs:['en','fr','pt']}
@@ -605,7 +612,13 @@
                 }
             ]},
             {name:"komodor",
+             country: "usa",
              location:"San Diego,Ca",
+             address: "",
+             phone:"",
+             website:"",
+             email:"",
+             owner:"",
              menus:[{category:"Burguers",
                    items:[{image: "http://placehold.it/120x120&text=image1",name: "Hamburger", ingredients:["bread","meat","ketchup"],currency:"USD", price:"10", langs:['en','fr','pt']},
                           {image: "http://placehold.it/120x120&text=image1",name: "Chickenburger", ingredients:["bread","chicken","vegetables"], currency:"USD",price:"15", langs:['en','fr','pt']}
@@ -732,7 +745,7 @@
                     <p>select another currency</p>
                     <select id="currency">
                           {currencies.map((i)=>
-                                                  <option>{i.abbreviation}</option>
+                                                  <option value={i.abbreviation}>{i.abbreviation}</option>
                                           )
                           }
                   </select>

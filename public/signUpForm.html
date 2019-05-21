@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>
+        SignUp
+      </title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    </head>
+    <body>
+      <h1 style="color:white; background:gray; padding:10px">TOTELL</h1>
+        <form action="/usereg" method='POST' style="margin-top:10%;">
+          <div class="container">
+            <div class="grid">
+
+              <div class="row">
+                <div class= "col-lg-3">
+                </div>
+                <div class= "col-lg-3">
+                    <h3> SIGN UP </h3>
+                </div>
+                <div class= "col-lg-3">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class= "col-lg-3">
+                </div>
+                  <div class= "col-lg-6 col-sm-12">
+                    <div class="form-group">
+                      <label for="exampleInputName">Uername</label>
+                      <input type="text" name= "username" class="form-control" placeholder="Username">
+                    </div>
+                  </div>
+                <div class= "col-lg-3">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class= "col-lg-3">
+                </div>
+                  <div class= "col-lg-6 col-sm-12">
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                  </div>
+                <div class= "col-lg-3">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class= "col-lg-3">
+                </div>
+                  <div class= "col-lg-6 col-sm-12">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Email address</label>
+                      <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                      <small id="emailHelp" class="form-text text-muted">We"ll never share your email with anyone else.</small>
+                    </div>
+                  </div>
+                <div class= "col-lg-3">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class= "col-lg-3">
+                </div>
+                <div class="form-group form-check">
+                  <input style="margin-left:0px;" name="check" type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label style="margin-left:15px;" class="form-check-label" for="exampleCheck1">I Agree to the terms and conditions</label>
+                </div>
+                <div class= "col-lg-3">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class= "col-lg-3">
+                </div>
+                <!--<a href="{{url_for("rgstr_user")}}">Sign In</a>-->
+                <!--<button type="button" style="margin-left:15px;" type="submit" class="btn btn-primary">Submit</button>-->
+                <button name="submit" style="margin-left:15px;" type="submit" class="btn btn-primary">Submit</button>
+                <div class= "col-lg-3">
+                </div>
+              </div>
+        </form>
+    </body>
+   </html>
