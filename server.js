@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 
 var app = express();
+var router = express.Router()
 
 //serving static files from React App
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -75,10 +76,6 @@ app.use('/usereg',(req,res)=>{
 });
 
 
-
-app.get('/restform',(req,res)=>
-    {res.redirect('/public/resturant.html');});
-
 app.use('/addrestaurant', (req,res)=>{
     var newRestaurant= new Restaurant ({
         name: req.body.RestName,
@@ -105,6 +102,32 @@ app.use('/addrestaurant', (req,res)=>{
         }
     });
 });
+
+app.use('/updateitem', (req,res)=>{
+    //====>TO DO ===> UPDATE AN EXISTING MENU ITEM
+    // ?? NEED TO KNOW MORE ABOUT UPDATING IN MONGODB ??
+})
+
+app.use('/menu/restaurantId/:restaurantId', (req, res)=>{
+    //====>TO DO ===> MUST WORK ON THIS ROUTE
+    console.log(JSON.stringify(req.params))
+    var id = req.params.restaurantId
+    console.log('from express app', id);
+    try{
+        result = Restaurant.find({"id":id})
+        if (!result){
+            res.send('no record for this id');
+        }
+        else{
+            let result = res.json(result);
+            console.log('send restaurant info to the component')
+        }
+    }
+    catch(error){
+        console.log('there is an error in querying db '+error)
+    }
+});
+
 
 app.get('*',(req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'))

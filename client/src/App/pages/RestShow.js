@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Restaurant from './reactComponents/Restaurant.js'
 
+
 class RestShow extends Component {
     constructor(props){
         super(props)
@@ -17,7 +18,8 @@ class RestShow extends Component {
     getList = () => {
         fetch('/restshow')
             .then(res => res.json())
-            .then(list => this.setState({ list }))
+            .then(list => this.setState({ list }))//it uses destructuring syntax
+            // this.setState({list}) is equal to this.setState({list:list})
     }
 
     render(){
@@ -26,7 +28,7 @@ class RestShow extends Component {
              <div>
                    <h1 id="totell"> TOTELL </h1>
                    {list.map((i)=>
-                       <Restaurant {...i}/>
+                       <Restaurant {...i} />
                    )}
              </div>
          );

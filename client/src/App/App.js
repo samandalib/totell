@@ -1,31 +1,34 @@
 import React, { Component }from 'react';
-import {Route, Switch} from 'react-router-dom';
+import { render } from 'react-dom'
+import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 
 import './style.css';
 
 import RestaurantForm from './pages/RestForm';
 import RestShow from './pages/RestShow';
 import Home from './pages/Home';
-
+import MenuForm from './pages/MenuForm';
 
 class App extends Component{
     render(){
         const App = ()=>(
+            <BrowserRouter>
             <div>
                 <Switch>
                     <Route exact path='/' component={Home} />
                     <Route path='/restshow' component={RestShow} />
                     <Route path='/restform' component={RestaurantForm} />
+                    <Route path='/menuform' component = {MenuForm} />//To show the content of MenuForm Component based on params in the url
+                    <Redirect from='/addrestaurant' to="/restform" />
                 </Switch>
             </div>
+            </BrowserRouter>
         )
         return (
-            <Switch>
                 <App/>
-            </Switch>
         );
-        }
     }
+}
 /*
 function App() {
   return (

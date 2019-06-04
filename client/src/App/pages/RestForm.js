@@ -16,49 +16,21 @@ class RestaurantForm extends Component{
         this.handleChange= this.handleChange.bind(this);
     }
 
-    handleChange(id,val){
-        switch(id){
-            case 1:
-                this.setState({name:val});
-                break;
-            case 2:
-                this.setState({country:val});
-                break;
-            case 3:
-                this.setState({city:val});
-                break;
-            case 4:
-                this.setState({address: val});
-                break;
-            case 5:
-                this.setState({phone:val});
-                break;
-            case 6:
-                this.setState({website:val});
-                break;
-            case 7:
-                this.setState({email:val});
-                break;
-            case 8:
-                this.setState({owner:val});
-                break;
-
-        };
-
-
-    };
+    handleChange(event){
+        this.setState({[event.target.name]: event.target.value});
+    }
 
     handleSubmit(){
         try{
-            this.setState({resDisplay:0, menuDisplay:1},()=>
-                    console.log('resturan form submited and dispaly states changed')
+            this.setState({restDisplay:0, menuDisplay:1},()=>
+                    console.log('restaurant form submited and dispaly states changed')
             )
 
         }
         catch(err){
             console.log('an error occured and prevented form submit: '+err)
         }
-    };
+    }
 
     render(){
         return(
@@ -67,37 +39,37 @@ class RestaurantForm extends Component{
                     <h2>Restaurant Registration</h2>
                     <label>
                     Name:
-                      <ControlledInput id= "1"  name="RestName" value = {this.state.name} action={this.handleChange} type="text" className="textInput" />
+                      <ControlledInput  name="name" value = {this.state.name} action={this.handleChange} type="text" className="textInput" />
                     </label>
                     <label>
                     Country:
-                      <CountrySelector id= "2"  name = "RestCountry" value = {this.state.country} action={this.handleChange} className="dropdownList" />
+                      <CountrySelector  name = "country" value = {this.state.country} action={this.handleChange} className="dropdownList" />
                     </label>
                     <label>
                     City:
-                      <ControlledInput id= "3"  name="RestCity" value = {this.state.city} action={this.handleChange} type="text" className="textInput" />
+                      <ControlledInput  name="city" value = {this.state.city} action={this.handleChange} type="text" className="textInput" />
                     </label>
                     <label>
                     Address:
-                      <ControlledInput id= "4"  name="RestAddress" value = {this.state.address} action={this.handleChange} type="text" className="textInput" />
+                      <ControlledInput  name="address" value = {this.state.address} action={this.handleChange} type="text" className="textInput" />
                     </label>
                     <label>
                     Phone:
-                      <ControlledInput id= "5"  name="RestPhone" value = {this.state.phone} action={this.handleChange} type="tel" className="textInput" />
+                      <ControlledInput  name="phone" value = {this.state.phone} action={this.handleChange} type="tel" className="textInput" />
                     </label>
                     <label>
                     Website:
-                      <ControlledInput id= "6"  name="RestWeb" value = {this.state.website} action={this.handleChange} type="text" className="textInput" />
+                      <ControlledInput  name="website" value = {this.state.website} action={this.handleChange} type="text" className="textInput" />
                     </label>
                     <label>
                     Email:
-                      <ControlledInput id= "7"  name="RestEmail" value = {this.state.email} action={this.handleChange} type="email" className="textInput" />
+                      <ControlledInput  name="email" value = {this.state.email} action={this.handleChange} type="email" className="textInput" />
                     </label>
                     <label>
                     Owner:
-                      <ControlledInput id= "8"  name="RestOwner" value = {this.state.owner} action={this.handleChange} type="text" className="textInput" />
+                      <ControlledInput  name="owner" value = {this.state.owner} action={this.handleChange} type="text" className="textInput" />
                     </label>
-                      <input id= "9"  value = "Add Restaurant" type="submit" className="submit" />
+                      <input  value = "Add Restaurant" type="submit" className="submit" />
                 </form>
             </div>
         );
