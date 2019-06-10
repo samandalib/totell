@@ -53,6 +53,30 @@ app.get('/restshow', (req,res) =>{
 }
 )
 
+app.get('/filter/:srchFilter', (req,res)=>{
+    let filter = req.params.srchFilter
+    console.log(filter)
+    let pattern = `/${filter}$/i`
+    console.log(pattern)
+    //try{
+        /*result = Restaurant.find({$or:[{title:{$regex:pattern}},
+            {state:{$regex:pattern}},
+            {city: {$regex:pattern}},
+        ]});*/
+    Restaurant.find({name:filter},(err,result)=>{
+        if (err){
+            res.type('html').status(500);
+            res.send('Error in Searching db: '+ err);
+        }else if (result.length == 0){
+            res.type('html').status(200)
+            res.send('There is no result for this search')
+        } else{
+            console.log(result)
+            let srchRslt = res.json(result)
+            console.log('List of Results with Regex Search is sent')
+        }
+    })
+})
 
 app.use('/signup',(req,res)=>
     res.redirect('/client/build/signupform.html')

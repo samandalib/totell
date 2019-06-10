@@ -6,6 +6,7 @@ import MenuHeading from './MenuHeading.jsx';
 import Category from './Category.jsx';
 import FilteredItems from './FilteredItems.jsx';
 
+
 class MenuBuilder extends Component{//IT IS USED IN MenuForm.js
     constructor(props){
         super(props)

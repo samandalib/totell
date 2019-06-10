@@ -8,6 +8,8 @@ import RestaurantForm from './pages/RestForm';
 import RestShow from './pages/RestShow';
 import Home from './pages/Home';
 import MenuForm from './pages/MenuForm';
+import SearchBox from './pages/SearchBox.js';
+import RestMenu from './pages/RestMenu.js';
 
 class App extends Component{
     render(){
@@ -16,9 +18,12 @@ class App extends Component{
             <div>
                 <Switch>
                     <Route exact path='/' component={Home} />
-                    <Route path='/restshow' component={RestShow} />
+                    <Route exact path='/restshow' component={RestShow} />
+                    <Route path='/restshow/:restname' component={RestMenu} />
                     <Route path='/restform' component={RestaurantForm} />
                     <Route path='/menuform' component = {MenuForm} />//To show the content of MenuForm Component based on params in the url
+                    <Route exact path='/filter' component = {SearchBox} />
+                    <Route path='/filter/:searchFilter' component = {SearchBox} />
                     <Redirect from='/addrestaurant' to="/restform" />
                 </Switch>
             </div>

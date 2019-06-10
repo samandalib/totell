@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-class RestInfo extends Component{
+class RestInfo extends Component{//This Compnent is used in Restaurant.js and SearchResaults.jsx
     constructor(props){
         super(props)
         this.restaurant = this.props.name
-        this.state = this.props.state
+        this.State = this.props.state
         this.city = this.props.city
         this.address= this.props.address
         this.zip = this.props.zip
@@ -14,7 +14,7 @@ class RestInfo extends Component{
         return(
             <div>
                 <h1 id="restaurantName">{`restaurantName: ${this.restaurant}`}</h1>
-                <h3 id="restState">{this.city}, {this.state} </h3>
+                <h3 id="restState">{this.city}, {this.State} </h3>
                 <p id="restAddress">{this.address} {this.zip}</p>
             </div>
         );
