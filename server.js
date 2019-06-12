@@ -1,5 +1,6 @@
 //creating node express app
 var express = require('express');
+var session = require('express-session')
 var path = require('path');
 
 var app = express();
@@ -24,16 +25,37 @@ var db = new sqlite3.Database('totell.db');
 var User=require('./db/user.js');
 var Restaurant=require('./db/restaurant.js');
 
-const port = process.env.PORT || 5000;
+var {
+    PORT = 5000,
+    searchfilter = "",
+} = process.env
 
+console.log('initiate searchfilter variable: ', searchfilter)
 
-app.listen(port, function(){
-  console.log('Menu app listening on port'+port);
+app.listen(PORT, function(){
+  console.log('Menu app listening on port'+PORT);
 });
 
 app.get('/', function(req,res){
   res.sendFile(path.join(__dirname)+'/client/public/index.html')
 });
+
+app.use('/login', (req,res)=>{
+    console.log('username: ', req.body.username)
+    console.log('password: ', req.body.password)
+    User.find({username:req.body.username, password:req.body.password}, (err,user)=>{
+        if(err){
+            res.type('html').status(500);
+            res.send('Error in Login: '+ err);
+        }
+        else if (user.length == 0){
+            res.type('html').status(200);
+            res.send('There is no User with this username/password in the database')
+        } else{
+            res.send(`${user} sucessfully logged in`)
+        }
+    })
+})
 
 app.get('/restshow', (req,res) =>{
     Restaurant.find((err, allRestaurants)=>{
@@ -52,18 +74,36 @@ app.get('/restshow', (req,res) =>{
     })
 }
 )
+var changeSearchFilter = (req,res,next)=>{
+    searchfilter = req.body.searchtext
+    console.log('from middleware: ' ,searchfilter)
+    next();
+}
+/*
+var resetSearchFilter = (req,res,next)=>{
+    searchfilter = ""
+    console.log('Reset search filter: ', searchfilter)
+    next();
+}
+*/
 
-app.get('/filter/:srchFilter', (req,res)=>{
-    let filter = req.params.srchFilter
-    console.log(filter)
-    let pattern = `/${filter}$/i`
-    console.log(pattern)
+
+app.use('/filter', changeSearchFilter,  (req,res)=>{
+    console.log('search text: ', req.body.searchtext)
+    let filter = req.body.searchtext
+    console.log('filter is: ',filter)
+    //res.redirect('/searchfilter')
+    //let pattern = `/${filter}$/i`
+    //console.log(pattern)
+})
     //try{
         /*result = Restaurant.find({$or:[{title:{$regex:pattern}},
             {state:{$regex:pattern}},
             {city: {$regex:pattern}},
         ]});*/
-    Restaurant.find({name:filter},(err,result)=>{
+app.use('/searchfilter',(req,res)=>{
+    console.log('from /searchfilter: ', searchfilter)
+    Restaurant.find({name:searchfilter},(err,result)=>{
         if (err){
             res.type('html').status(500);
             res.send('Error in Searching db: '+ err);
@@ -74,19 +114,21 @@ app.get('/filter/:srchFilter', (req,res)=>{
             console.log(result)
             let srchRslt = res.json(result)
             console.log('List of Results with Regex Search is sent')
+
+
         }
-    })
+    }
+    )
 })
 
-app.use('/signup',(req,res)=>
-    res.redirect('/client/build/signupform.html')
-);
-
-app.use('/usereg',(req,res)=>{
+app.post('/usereg',(req,res)=>{
+    console.log(req.body)
     var newUser= new User ({
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,
+        country: req.body.country,
+        membership: req.body.membership
     });
     newUser.save((err)=>{
         if(err){
@@ -94,13 +136,13 @@ app.use('/usereg',(req,res)=>{
             res.send('Error in sign up process: '+err);
         }
         else{
-            res.render('registered', {user: newUser});
+            res.send('user succesfully registered on database');
         }
     });
 });
 
 
-app.use('/addrestaurant', (req,res)=>{
+app.post('/addrestaurant', (req,res)=>{
     var newRestaurant= new Restaurant ({
         name: req.body.RestName,
         country: req.body.RestCoutnry,
@@ -127,8 +169,11 @@ app.use('/addrestaurant', (req,res)=>{
     });
 });
 
-app.use('/updateitem', (req,res)=>{
-    //====>TO DO ===> UPDATE AN EXISTING MENU ITEM
+
+
+app.use('/updatemenu', (req,res)=>{
+    res.send('updating menu')
+    //====>TO DO ===> UPDATE AN EXISTING MENU CATEGORIES/ITEMS
     // ?? NEED TO KNOW MORE ABOUT UPDATING IN MONGODB ??
 })
 

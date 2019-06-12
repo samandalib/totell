@@ -8,6 +8,7 @@ class Restaurant extends Component{//IT IS USED IN RestShow.js
         super(props)
     }
     render(){
+        console.log('FROM Restaurant.js: ',this.props.menu)
         return (
           <div>
                     <RestInfo name={this.props.name} state ={this.props.state} city={this.props.city} address={this.props.address} zip={this.props.zip} />

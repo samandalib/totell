@@ -21,7 +21,7 @@ class ItemUpdate extends Component{//IT IS USED IN ItemForm.jsx
     render(){
         //4 text input + 1 image upload
         return(
-            <form action="/updateitem" method='POST'>
+            <form action="/updatemenu" method='POST'>
                 <label>
                 Item Name:
                 <ControlledInput type="text" id= "itemName"  name="name" value = {this.props.title} action={this.handleChange}  className="textInput" />

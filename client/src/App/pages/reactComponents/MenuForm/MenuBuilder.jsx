@@ -6,6 +6,7 @@ import MenuHeading from './MenuHeading.jsx';
 import Category from './Category.jsx';
 import FilteredItems from './FilteredItems.jsx';
 
+import './menuBuilderStyle.css';
 
 class MenuBuilder extends Component{//IT IS USED IN MenuForm.js
     constructor(props){
@@ -35,18 +36,15 @@ class MenuBuilder extends Component{//IT IS USED IN MenuForm.js
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleFilter = this.handleFilter.bind(this)
-
+        this.handleChange = this.handleChange.bind(this)
     };
 
     componentWillMount(){
         this.setState({categoryNames:this.categories}, ()=>{
-            ///console.log('will Mount', this.state.categoryNames);
+            console.log('will Mount', this.state.categoryNames);
         })
     }
 
-    componentDidMount(){
-        ///console.log('Did Mount:', this.state.categoryNames)
-    };
 /*WORKING ON THIS PART TO MAKE THE PAGE FOR MENU BUILDER*/
 
 /*
@@ -67,13 +65,18 @@ class MenuBuilder extends Component{//IT IS USED IN MenuForm.js
 
 
     handleChange(event){
-        this.setState((prevState, props) =>{
-            return {categoryCount:prevState.categoryCount+1 , tempValue:prevState.tempValue.push(event.target.value)}
-        })
+        let newValue = event.target.value
+        this.setState({tempValue:newValue}, ()=>{
+            console.log('tempValue: ', this.state.tempValue)
+        });
     }
 
     handleSubmit(){
-        this.setState({categoryNames:this.state.categoryNames.push(this.state.tempValue), tempValue:""})
+        console.log('handleSubmit tempValue',this.state.tempValue)
+        this.setState(
+            {categoryNames:this.state.categoryNames.push(this.state.tempValue), tempValue:""}
+            , ()=> console.log('Category Names: ',this.state.categoryNames, 'tempValue: ', this.state.tempValue)
+        )
     }
 
     handleFilter(event){
@@ -104,7 +107,9 @@ class MenuBuilder extends Component{//IT IS USED IN MenuForm.js
     };*/
     render(){
         console.log('restObject: ', this.restObject)
-        console.log('SEE FITER: ', this.restObject.menu)
+        console.log('SEE Menu: ', this.restObject.menu)
+        console.log('SEE Filter: ', this.state.filter)
+        console.log('Category Names: ', this.state.categoryNames)
         //////console.log('from render: ', this.state.categoryNames)
         //////console.log('info: ',this.restaurant,this.State,this.city,this.address,this.zip,this.restaurantId)
         //add Category Form
@@ -112,7 +117,7 @@ class MenuBuilder extends Component{//IT IS USED IN MenuForm.js
         //Populate each category with its Items
             if (this.state.filter == 'All'){
                 return(
-                    <div>
+                    <div id="menuBuilder">
                         <MenuHeading
                             handleFilter = {this.handleFilter}
                             handleSubmit = {this.handleSubmit}
@@ -135,6 +140,7 @@ class MenuBuilder extends Component{//IT IS USED IN MenuForm.js
                     </div>
                 );
             } else {
+
                 return(
                     <div>
                         <MenuHeading
@@ -164,7 +170,7 @@ class MenuBuilder extends Component{//IT IS USED IN MenuForm.js
                     </div>
                 )
 
-            }
         }
     }
+}
 export default MenuBuilder;

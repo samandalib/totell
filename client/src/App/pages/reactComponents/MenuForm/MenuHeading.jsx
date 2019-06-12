@@ -6,7 +6,7 @@ import ControlledInput from '../ControlledInput.js';
 class MenuHeading extends Component{
     constructor(props){
         super(props)
-        this.state = {tempValue:""}
+
     }
     render(){
         return(
@@ -14,10 +14,10 @@ class MenuHeading extends Component{
 
                 <RestInfo name={this.props.restaurant} state ={this.props.State} city={this.props.city} address={this.props.address} zip={this.props.zip} id={this.props.restaurantId} />
 
-                <form>
+                <form action="/updatemenu" onSubmit={this.props.handleSubmit} method="POST" >
 
-                    <ControlledInput type="text" id="text-input" onChange={this.props.handleChange} name="categoryInput" value={this.state.tempValue}  />
-                    <button id="add-category" onClick={this.props.handleSubmit} name="Add Category">Add Category</button>
+                    <input type="text" id="text-input" onChange={this.props.handleChange} name="categoryInput" value={this.props.tempValue}  />
+                    <input id="add-category"  type="submit" value = "Add Category" />
                 </form>
 
                 <div>

@@ -1,5 +1,3 @@
-var React = require('react');
-
 const countries=
 [
   {name: 'Afghanistan', code: 'AF'},
@@ -247,26 +245,4 @@ const countries=
   {name: 'Zimbabwe', code: 'ZW'}
 ]
 
-class CountrySelector extends React.Component{
-    constructor(props){
-        super(props)
-        this.state={value:""}
-        this.handleChange= this.handleChange.bind(this)
-    }
-    handleChange(e){
-        this.setState({value: e.target.value},()=>
-            this.props.action(this.props.id, this.state.value))
-    }
-    render(){
-        return(
-              <select value={this.state.value} id="country" name={this.props.country} onChange={this.handleChange} >
-                        {countries.map((i)=>
-                                                <option value={i.name}>{i.name}</option>
-                                        )
-                        }
-              </select>
-        );
-    }
-};
-
-export default CountrySelector;
+export default countries;

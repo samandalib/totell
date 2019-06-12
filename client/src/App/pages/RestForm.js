@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 
-import CountrySelector from './reactComponents/selCountry.js';
+import CountrySelector from './reactComponents/CountrySelector/selCountry.js';
 import ControlledInput from './reactComponents/ControlledInput.js';
 
 class RestaurantForm extends Component{
