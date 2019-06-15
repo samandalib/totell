@@ -4,9 +4,7 @@ import MenuShow from './MenuShow.js';
 import RestInfo from './RestInfo.js';
 
 class Restaurant extends Component{//IT IS USED IN RestShow.js
-    constructor(props){
-        super(props)
-    }
+
     render(){
         console.log('FROM Restaurant.js: ',this.props.menu)
         return (

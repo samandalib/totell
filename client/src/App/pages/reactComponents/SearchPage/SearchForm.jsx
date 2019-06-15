@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 
 class SearchForm extends Component{//IT IS USED IN SearchBox.js
 
@@ -9,7 +8,9 @@ class SearchForm extends Component{//IT IS USED IN SearchBox.js
         this.handleChange = this.handleChange.bind(this)
     }
     handleChange(e){
-        this.setState({filter: e.target.value})
+        this.setState({filter: e.target.value},()=>{
+            console.log('from SearchForm.jsx, Filter set in handleChange: ', this.state.filter)
+        })
     }
     render(){
         return(

@@ -4,13 +4,9 @@ import CurrencySelector from './CurrencySelector';
 import IngredientTooltip from './Tooltip.jsx';
 
 class MenuItem extends Component{//IT IS USED IN MenuShow.js
-    constructor(props){
-        super(props)
-    }
     render(){
             return(
                   <div id="MenuItem">
-                        //<ItemImage src={this.props.image} alt={this.props.title}/>
                         <ItemName name={this.props.title}/>
                         <ItemIngredients ings={this.props.ingredients}/>
                         <ItemPrice price={this.props.price} />

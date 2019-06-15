@@ -13,6 +13,7 @@ import RestMenu from './pages/RestMenu.js';
 import SignUp from './pages/SignUp.js';
 import Login from './pages/Login.js';
 import SearchForm from './pages/reactComponents/SearchPage/SearchForm.jsx';
+import SearchResults from './pages/reactComponents/SearchPage/SearchResults.jsx';
 class App extends Component{
     render(){
         const App = ()=>(
@@ -27,6 +28,7 @@ class App extends Component{
                     <Route path='/restform' component={RestaurantForm} />
                     <Route path='/menuform' component = {MenuForm} />//To show the content of MenuForm Component based on params in the url
                     <Route path='/search' component = {SearchBox} />
+                    <Route path='/searchresult' component = {SearchResults} />
                     <Redirect from='/addrestaurant' to="/restform" />
                 </Switch>
             </div>

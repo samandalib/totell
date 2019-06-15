@@ -13,10 +13,10 @@ class RestInfo extends Component{//This Compnent is used in Restaurant.js and Se
     render(){
         return(
             <div>
-                <h1 id="restaurantName">{`restaurantName: ${this.restaurant}`}</h1>
+                <h1 id="restaurantName">{`Restaurant Name: ${this.restaurant}`}</h1>
                 <h3 id="restState">{this.city}, {this.State} </h3>
                 <p id="restAddress">{this.address} {this.zip}</p>
-                <button type="button" onClick={this.props.action}>Explore Menu</button>
+
             </div>
         );
     }

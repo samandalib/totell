@@ -79,19 +79,17 @@ var changeSearchFilter = (req,res,next)=>{
     console.log('from middleware: ' ,searchfilter)
     next();
 }
-/*
-var resetSearchFilter = (req,res,next)=>{
-    searchfilter = ""
-    console.log('Reset search filter: ', searchfilter)
-    next();
-}
-*/
-
-
 app.use('/filter', changeSearchFilter,  (req,res)=>{
-    console.log('search text: ', req.body.searchtext)
-    let filter = req.body.searchtext
-    console.log('filter is: ',filter)
+    if (req.body.searchtext){
+        console.log('search text: ', req.body.searchtext)
+        let filter = req.body.searchtext
+        console.log('filter is: ',filter)
+/*
+        res.redirect('/searchfilter')
+
+*/    }else{
+        res.send('There is no search parameter, please go to /search route')
+    }
     //res.redirect('/searchfilter')
     //let pattern = `/${filter}$/i`
     //console.log(pattern)
@@ -102,23 +100,27 @@ app.use('/filter', changeSearchFilter,  (req,res)=>{
             {city: {$regex:pattern}},
         ]});*/
 app.use('/searchfilter',(req,res)=>{
-    console.log('from /searchfilter: ', searchfilter)
-    Restaurant.find({name:searchfilter},(err,result)=>{
-        if (err){
-            res.type('html').status(500);
-            res.send('Error in Searching db: '+ err);
-        }else if (result.length == 0){
-            res.type('html').status(200)
-            res.send('There is no result for this search')
-        } else{
-            console.log(result)
-            let srchRslt = res.json(result)
-            console.log('List of Results with Regex Search is sent')
+    if (searchfilter){
+        console.log('from /searchfilter: ', searchfilter)
+        Restaurant.find({name:searchfilter},(err,result)=>{
+            if (err){
+                res.type('html').status(500);
+                res.send('Error in Searching db: '+ err);
+            }else if (result.length == 0){
+                res.type('html').status(200)
+                res.send('There is no result for this search')
+            } else{
+                console.log(result)
+                let srchRslt = res.json(result)
+                console.log('List of Results with Regex Search is sent')
+                srchRslt = {}
+                console.log('SEARCH RESULT RESET AFTER SENDING JSON')
+            }
 
-
-        }
+        })
+    } else {
+        res.send('there is no filter set to search for')
     }
-    )
 })
 
 app.post('/usereg',(req,res)=>{

@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 
 import RestInfo from '../RestInfo.js';
-import ControlledInput from '../ControlledInput.js';
 
 class MenuHeading extends Component{
-    constructor(props){
-        super(props)
-
-    }
     render(){
         return(
             <div>

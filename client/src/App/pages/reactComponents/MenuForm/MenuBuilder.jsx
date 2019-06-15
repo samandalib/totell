@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import RestInfo from '../RestInfo.js';
-import ControlledInput from '../ControlledInput.js';
 import MenuHeading from './MenuHeading.jsx';
 import Category from './Category.jsx';
 import FilteredItems from './FilteredItems.jsx';
