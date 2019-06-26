@@ -10,8 +10,8 @@ class SearchBox extends Component{
 
     }
 
-    getList=()=>{
-        fetch('/searchfilter')
+    getList=(route)=>{
+        fetch(route)
             .then(res => res.json())
             //.then( json => console.log(json))
             .then(srchRslt => this.setState({ srchRslt }, ()=>console.log('setState in fetch process')))//it uses destructuring syntax

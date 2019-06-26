@@ -31,7 +31,7 @@ class SrchRsltUnit extends  Component{
             return (
 
                 <div>
-                    <RestInfo  name={this.result.name} state ={this.result.state} city={this.result.city} address={this.result.address} zip={this.result.zip} />
+                    <RestInfo  name={this.props.RestObject.name} state ={this.props.RestObject.state} city={this.props.RestObject.city} address={this.props.RestObject.address} zip={this.props.RestObject.zip} />
                     <input id="exploreMenuButt" type="button"  value="Expand Menu" onClick={this.handleClick}/>
                 </div>
 
