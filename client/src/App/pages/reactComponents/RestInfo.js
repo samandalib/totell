@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
 
 class RestInfo extends Component{//This Compnent is used in Restaurant.js and SearchResaults.jsx
-    constructor(props){
-        super(props)
-        this.restaurant = this.props.name
-        this.State = this.props.state
-        this.city = this.props.city
-        this.address= this.props.address
-        this.zip = this.props.zip
-        this.restaurantId = this.props.id
-    }
     render(){
         return(
             <div>
-                <h1 id="restaurantName">{`Restaurant Name: ${this.restaurant}`}</h1>
-                <h3 id="restState">{this.city}, {this.State} </h3>
-                <p id="restAddress">{this.address} {this.zip}</p>
+                <h1 id="restaurantName">{this.props.name}</h1>
+                <h3 id="restState">{this.props.city}, {this.props.state} </h3>
+                <p id="restAddress">{this.props.address} {this.props.zip}</p>
 
             </div>
         );

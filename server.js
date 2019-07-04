@@ -15,7 +15,7 @@ var Restaurant=require('./db/restaurant.js');
 //Moddleware
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.urlencoded({extended:true}));
-app.use((req,res,next)=>{
+app.use((req,res,next)=>{//This middleware defines decoration for accessing db
     req.user_db = User
     req.restaurant_db=Restaurant
     next()
@@ -34,9 +34,14 @@ app.post('/login', callbacks.postRoutes.postLogin)
 
 app.get('/restshow', callbacks.getRoutes.getRestShow)
 
+/*
 app.post('/filter', callbacks.postRoutes.postFilter)
+
+*/
 app.get('/search', callbacks.getRoutes.getSearch)
 app.get('/search/:filter', callbacks.getRoutes.getSearchFilter)
+app.get('/search/restaurant/:filter', callbacks.getRoutes.getFullData)
+app.get('/menu/:restaurant', callbacks.getRoutes.getRestMenu);
 
 app.post('/usereg', callbacks.postRoutes.postUserReg);
 
@@ -44,13 +49,13 @@ app.post('/addrestaurant', callbacks.postRoutes.postAddRest);
 
 
 
-app.use('/updatemenu', (req,res)=>{
+app.post('/updatemenu/:menu', (req,res)=>{
     res.send('updating menu')
     //====>TO DO ===> UPDATE AN EXISTING MENU CATEGORIES/ITEMS
     // ?? NEED TO KNOW MORE ABOUT UPDATING IN MONGODB ??
 })
 
-app.use('/menu/restaurantId/:restaurantId', (req, res)=>{
+app.get('/menu/:restaurantId', (req, res)=>{
     //====>TO DO ===> MUST WORK ON THIS ROUTE
     console.log(JSON.stringify(req.params))
     var id = req.params.restaurantId

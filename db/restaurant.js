@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
+var User = require('./user.js');
 
 mongoose.connect("mongodb+srv://hesamandalib:hesam14239@restaurant-7f8ln.mongodb.net/test?retryWrites=true",{useNewUrlParser: true})
 
 var Schema=mongoose.Schema;
 
 var menuItemsSchema= new Schema({
-    image:{type:String,},
+    image:{type:Buffer,},
     title:{type:String,required:true},
     ingredients:{type:Array, required:true},
     price: {type: Number, required:true},
@@ -19,7 +20,8 @@ var menuSchema = new Schema({
 });
 
 var restaurantSchema = new Schema({
-    id:{type:String},
+    _id:{type:Number},
+    _owner:{type:Number , ref:'User'},
     name:{type:String, required:true},
     country:{type:String},
     currency:{type:String},
@@ -36,5 +38,14 @@ var restaurantSchema = new Schema({
     type:{type:String},
 
 })
+
+restaurantSchema.virtual('fullString')
+    .get(   function(){
+        return this._owner+' '+this.name+' '+this.country+' '+
+        this.currency+' '+this.state+' '+this.province+' '+
+        this.city+' '+this.address+' '+this.zip+' '+this.phone+' '+
+        this.website+' '+this.email+' '+this.owner+' '+this.type
+    })
+
 
 module.exports = mongoose.model('restaurant',restaurantSchema);
