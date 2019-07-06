@@ -29,7 +29,7 @@ class SrchRsltUnit extends  Component{//It is used in SearchResults.jsx
     }
 
     render(){
-        let route = `/menu/${this.props.RestObject.name}`
+        let route = `/restProfile/${this.props.RestObject.name}/${this.props.RestObject.zip}`
         console.log('render function at SrchRsltUnit.jsx: ',this.props.RestObject)
         if (this.state.show == 1){
             return(

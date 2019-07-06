@@ -41,7 +41,13 @@ app.post('/filter', callbacks.postRoutes.postFilter)
 app.get('/search', callbacks.getRoutes.getSearch)
 app.get('/search/:filter', callbacks.getRoutes.getSearchFilter)
 app.get('/search/restaurant/:filter', callbacks.getRoutes.getFullData)
-app.get('/menu/:restaurant', callbacks.getRoutes.getRestMenu);
+app.get('/menu/:restaurant/:zip', callbacks.getRoutes.getRestMenu)
+app.get('/restprofile/:restname/:zip', callbacks.getRoutes.getRestProfile)
+
+app.get('/menuform/:restaurant/:zip', callbacks.getRoutes.getRestMenu)
+/*
+app.put('/menuform/:restaurant/:zip', callbacks.putRoutes.putRestaurantMenu)
+*/
 
 app.post('/usereg', callbacks.postRoutes.postUserReg);
 

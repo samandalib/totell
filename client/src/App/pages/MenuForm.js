@@ -2,44 +2,37 @@ import React, { Component } from 'react';
 
 import MenuBuilder from './reactComponents/MenuForm/MenuBuilder.jsx';
 
-import restObject from './Papa Cristos.js';
-
 
 class MenuManager extends Component{
     constructor(props){
         super(props)
-        this.state={resultObject:{}}
-        this.restaurantId =this.props.match.params.restaurantId
+        this.state = {data:{address:"", city:"", currency:"", id:"", menu:[], menu_url:"", name:"", state:"", type:"", zip:"", owner:""}}
+        this.restaurant =this.props.match.params.restaurant
+        this.zip = this.props.match.params.zip
     }
-    componentWillMount(){
-        console.log(this.props)
-        console.log("will Mount component: ", this.restaurantId)
+
+    getFullData(route){
+        console.log('getFullData fetch function: ', route)
+        fetch(route)
+            .then(res => res.json())
+            //.then( json => console.log(json))
+            .then(data => this.setState({ data}, ()=>console.log('setState in fetch process for getFullData:', this.state.data)))//it uses destructuring syntax
+            // this.setState({list}) is equal to this.setState({list:list})
+            .catch( err => console.log('ERROR IN FETCH: ',err))
     }
+
     componentDidMount(){
         //Fetch
         console.log('start componentDidMount')
         //this.getObejct()
-        };
+        let route = `/menu/${this.props.match.params.restaurant}/${this.props.match.params.zip}`
+        this.getFullData(route)
+    }
+    render(){
 
-    /*getObject = () => {
-        fetch(`/menu/restaurantId/${this.restaurantId}`)
-            .then((res) => res.json())
-            .then((result) => this.setState({restObject:result}))
-            .catch((err)=>console.log('there is an error in fetching function'))
-    }
-}*/
-/*
-    render(){
-        return(
-            <p> restaurantID is: {this.restaurantId}</p>
-        )
-    }
-    */
-    render(){
-        console.log(restObject)
         return(
             <div>
-                <MenuBuilder restaurant = {restObject} />
+                <MenuBuilder restaurant = {this.state.data} />
             </div>
         );
     }

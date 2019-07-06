@@ -79,8 +79,12 @@ module.exports = {
 
     getRestMenu (req,res){
         let restaurant = req.params.restaurant
+        let zip = req.params.zip
+        let restNameRegex= new RegExp(".*"+restaurant+".*", "i")
+        let restZipRegex = new RegExp(".*"+zip+".*", "i")
         console.log('From getRestMenu: ', restaurant)
-        req.restaurant_db.findOne({name:restaurant}, (err,result)=>{
+        req.restaurant_db.findOne({$and:[{name:{$regex:restNameRegex}},{zip:{$regex:restZipRegex}}]},
+            (err,result)=>{
             if (err){
                 res.type('html').status(500);
                 res.send('Error in Searching db: '+ err);
@@ -94,4 +98,24 @@ module.exports = {
 
         })
     },
+
+    getRestProfile(req,res){
+        let restName = req.params.restname
+        let restZip = req.params.zip
+        let restNameRegex= new RegExp(".*"+restName+".*", "i")
+        let restZipRegex = new RegExp(".*"+restZip+".*", "i")
+        console.log(`getting data for ${restName}`)
+        req.restaurant_db.findOne({$and:[{name:{$regex:restNameRegex}},{zip:{$regex:restZipRegex}}]},
+            {"menu":0, "owner":0, "menu_url":0, "id":0 },
+            (err,result)=>{
+                if (err) {
+                    res.status(500).send('Error in searching db: '+err)
+                } else{
+                    res.status(200).send(result)
+                    console.log('Data succesfully sent to client: ', result)
+                }
+
+            })
+    },
+
 }

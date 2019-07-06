@@ -34,15 +34,29 @@ class SearchBox extends Component{
 
     render(){
         console.log('from render function at SearchBox.js', this.state.srchRslt)
-        return(
-            <div>
+        if (!this.state.searchText && this.state.srchRslt.length==0){
+            return (
                 <SearchForm action={this.getList.bind(this)} srchText={this.setSearchText.bind(this)} resetResults={this.resetResults.bind(this)} />
-                <SearchResults results={this.state.srchRslt}  srchText={this.state.searchText} />
+            )
+        }else if(this.state.searchText && this.state.srchRslt.length==0){
+            return(
+                <div>
+                    <SearchForm action={this.getList.bind(this)} srchText={this.setSearchText.bind(this)} resetResults={this.resetResults.bind(this)} />
+                    <p> Searching for {this.state.searchText} ... </p>
+                </div>
+            )
+        } else if (this.state.searchText && this.state.srchRslt.length>0){
+            return(
+                <div>
+                    <SearchForm action={this.getList.bind(this)} srchText={this.setSearchText.bind(this)} resetResults={this.resetResults.bind(this)} />
+                    <SearchResults results={this.state.srchRslt}  srchText={this.state.searchText} />
 
-            </div>
-        )
+                </div>
+            )
+        }
     }
 }
+
 
 
 export default SearchBox;

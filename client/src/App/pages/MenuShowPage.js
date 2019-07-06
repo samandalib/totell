@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import RestMenu from './reactComponents/RestMenu.js';
+
 import Restaurant from './reactComponents/Restaurant.js';
 
 class MenuShowPage extends Component{
@@ -20,7 +20,7 @@ class MenuShowPage extends Component{
             .catch( err => console.log('ERROR IN FETCH: ',err))
     }
     componentDidMount(){
-        let route = `/menu/${this.props.match.params.restaurant}`
+        let route = `/menu/${this.props.match.params.restaurant}/${this.props.match.params.zip}`
         this.getFullData(route)
     }
 
@@ -33,7 +33,7 @@ class MenuShowPage extends Component{
             return(
                 <div>
                     <p>  Menu for ... </p>
-                    <Restaurant {...this.state.data} />
+                    <Restaurant data={this.state.data} />
 
 
                 </div>

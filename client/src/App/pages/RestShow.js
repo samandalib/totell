@@ -28,7 +28,7 @@ class RestShow extends Component {
              <div>
                    <h1 id="totell"> TOTELL </h1>
                    {list.map((i)=>
-                       <Restaurant {...i} />
+                       <Restaurant data={i} />
                    )}
              </div>
          );

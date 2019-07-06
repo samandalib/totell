@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import MenuHeading from './MenuHeading.jsx';
-import Category from './Category.jsx';
-import FilteredItems from './FilteredItems.jsx';
+import MenuHeadingShow from './MenuHeadingShow.jsx';
+import CategoryShow from './CategoryShow.jsx';
+import FilteredItemsShow from './FilteredItemsShow.jsx';
 
-import './menuBuilderStyle.css';
 
-class MenuBuilder extends Component{//IT IS USED IN MenuForm.js
+
+class MenuBuilderShow extends Component{//IT IS USED IN MenuForm.js
     constructor(props){
         super(props)
         this.state = {
@@ -38,7 +38,7 @@ class MenuBuilder extends Component{//IT IS USED IN MenuForm.js
             if (this.state.filter == 'All'){
                 return(
                     <div id="menuBuilder">
-                        <MenuHeading
+                        <MenuHeadingShow
                             handleFilter = {this.handleFilter}
                             categoryNames ={categoryList}
                             restaurant={this.props.restaurant.name}
@@ -50,7 +50,7 @@ class MenuBuilder extends Component{//IT IS USED IN MenuForm.js
                         {categoryList.map((i) => {
                             return (
                                 <div>
-                                    <Category name = {i} menu = {this.props.restaurant.menu} />
+                                    <CategoryShow name = {i} menu = {this.props.restaurant.menu} />
                                 </div>
                             );
                         })}
@@ -60,7 +60,7 @@ class MenuBuilder extends Component{//IT IS USED IN MenuForm.js
 
                 return(
                     <div>
-                        <MenuHeading
+                        <MenuHeadingShow
                             handleFilter = {this.handleFilter}
                             categoryNames ={categoryList}
                             restaurant={this.props.restaurant.name}
@@ -76,7 +76,7 @@ class MenuBuilder extends Component{//IT IS USED IN MenuForm.js
                                 console.log('Items', i['items'])
                                 return (
                                     <div>
-                                        <FilteredItems name = {i['category']} menu = {i['items']} />
+                                        <FilteredItemsShow name={i['category']} items={i['items']} />
                                     </div>
                                 );
                             }
@@ -87,4 +87,4 @@ class MenuBuilder extends Component{//IT IS USED IN MenuForm.js
         }
     }
 }
-export default MenuBuilder;
+export default MenuBuilderShow;

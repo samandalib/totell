@@ -15,7 +15,7 @@ import Login from './pages/Login.js';
 import SearchForm from './pages/reactComponents/SearchPage/SearchForm.jsx';
 import SearchResults from './pages/reactComponents/SearchPage/SearchResults.jsx';
 import MenuShowPage from './pages/MenuShowPage.js';
-
+import RestPageShow from './pages/RestPageShow.js';
 class App extends Component{
     render(){
         const App = ()=>(
@@ -25,13 +25,14 @@ class App extends Component{
                     <Route exact path='/' component={Home} />
                     <Route path='/login' component={Login} />
                     <Route path='/signup' component={SignUp} />
+                    <Route path='/restprofile/:restname/:zip' component={RestPageShow} />
                     <Route exact path='/restshow' component={RestShow} />
                     <Route path='/restshow/:restname' component={RestMenu} />
                     <Route path='/restform' component={RestaurantForm} />
-                    <Route path='/menuform' component = {MenuForm} />//To show the content of MenuForm Component based on params in the url
+                    <Route path='/menuform/:restaurant/:zip' component = {MenuForm} />//To show the content of MenuForm Component based on params in the url
                     <Route path='/search' component = {SearchBox} />
                     <Route path='/searchresult' component = {SearchResults} />
-                    <Route path='/menu/:restaurant' component = {MenuShowPage} />
+                    <Route path='/menu/:restaurant/:zip' component = {MenuShowPage} />
                     <Redirect from='/addrestaurant' to="/restform" />
                 </Switch>
             </div>
