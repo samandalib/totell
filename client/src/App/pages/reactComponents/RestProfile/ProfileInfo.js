@@ -10,6 +10,8 @@ class ProfileInfo extends Component{
                 <p className="info">Type: {this.props.data.type} </p>
                 <p className="info">Currency: {this.props.data.currency}</p>
                 <p className="info"> {this.props.data.website}</p>
+                <p className="info"> Followers: {this.props.data.followers.length}</p>
+
 
             </div>
         )

@@ -2,16 +2,31 @@ module.exports = {
     postLogin(req,res){
         console.log('username: ', req.body.username)
         console.log('password: ', req.body.password)
-        req.user_db.find({username:req.body.username, password:req.body.password}, (err,user)=>{
+        req.user_db.findOne({$and:[{username:req.body.username}, {password:req.body.password}]},
+        (err,user)=>{
             if(err){
                 res.type('html').status(500);
                 res.send('Error in Login: '+ err);
             }
             else if (user.length == 0){
                 res.type('html').status(200);
-                res.send('There is no  with this username/password in the database')
+                res.send('There is no account related to this username/password in the database')
             } else{
-                res.send(`${user} sucessfully logged in`)
+/*
+                req.session.user = user.email
+                console.log('session from postLogin: ', req.session)
+                req.store.insert(req.session, (err, result)=>{
+                    if(err){
+                        res.type('html').status(500).send('Error in inserting session: ', err)
+                    } else{
+                        res.status(200).send('successfuly saved session on database')
+                    }
+                })
+*/
+                req.session.user = user
+                console.log('session info: ', req.session)
+                let profileRoute = req.session.user.username
+                res.redirect(`regprofile/${profileRoute}`)
             }
         })
     },
@@ -74,4 +89,15 @@ module.exports = {
         })
     },
 
+    postLogOut(req,res){
+        console.log('current session: ', req.session)
+        req.session.destroy()
+        if (req.session){
+            console.log('the session is not terminated yet')
+        } else{
+            res.redirect('/')
+
+        }
+
+    },
 }

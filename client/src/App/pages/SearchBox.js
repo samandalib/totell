@@ -29,7 +29,7 @@ class SearchBox extends Component{
     componentDidMount(){
         this.resetResults()
         this.setSearchText()
-        this.getList()
+        //this.getList()
     }
 
     render(){
@@ -50,13 +50,10 @@ class SearchBox extends Component{
                 <div>
                     <SearchForm action={this.getList.bind(this)} srchText={this.setSearchText.bind(this)} resetResults={this.resetResults.bind(this)} />
                     <SearchResults results={this.state.srchRslt}  srchText={this.state.searchText} />
-
                 </div>
             )
         }
     }
 }
-
-
 
 export default SearchBox;

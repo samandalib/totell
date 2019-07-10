@@ -5,6 +5,13 @@ mongoose.connect("mongodb+srv://hesamandalib:hesam14239@restaurant-7f8ln.mongodb
 
 var Schema=mongoose.Schema;
 
+var commentsSchema= new Schema({
+    text:{type:String},
+    user_id:{type:Number},
+    posted_at:{type:Date, default:Date()},
+    numberOfLikes:{type:Number},
+})
+
 var menuItemsSchema= new Schema({
     image:{type:Buffer,},
     title:{type:String,required:true},
@@ -12,6 +19,8 @@ var menuItemsSchema= new Schema({
     price: {type: Number, required:true},
     langs:{type:Array},
     description:{type:String},
+    comments:[commentsSchema],
+
 });
 
 var menuSchema = new Schema({
@@ -19,9 +28,25 @@ var menuSchema = new Schema({
     items:[menuItemsSchema],
 });
 
+var boardSchema= new Schema({
+    message:{type:Schema.Types.Mixed},
+    latst_update:{type:Date}
+
+})
+
+var gallerySchema=new Schema({
+    photo:{type:Buffer},
+    uploadDate:{type:Date},
+    comments:[commentsSchema],
+    numberOfLikes:{type:Number},
+})
+
+var followersSchema = new Schema({
+    userName:{type:String},
+})
 var restaurantSchema = new Schema({
-    _id:{type:Number},
     _owner:{type:Number , ref:'User'},
+    _id:{type:Schema.Types.ObjectId},
     name:{type:String, required:true},
     country:{type:String},
     currency:{type:String},
@@ -36,6 +61,9 @@ var restaurantSchema = new Schema({
     owner:{type:String, required:true},
     menu:[menuSchema],
     type:{type:String},
+    comments:[commentsSchema],
+    boardMessages:[boardSchema],
+    followers:[followersSchema],
 
 })
 

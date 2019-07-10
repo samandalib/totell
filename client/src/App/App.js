@@ -16,6 +16,8 @@ import SearchForm from './pages/reactComponents/SearchPage/SearchForm.jsx';
 import SearchResults from './pages/reactComponents/SearchPage/SearchResults.jsx';
 import MenuShowPage from './pages/MenuShowPage.js';
 import RestPageShow from './pages/RestPageShow.js';
+import RglrProfile from './pages/RglrProfile.js';
+
 class App extends Component{
     render(){
         const App = ()=>(
@@ -24,6 +26,7 @@ class App extends Component{
                 <Switch>
                     <Route exact path='/' component={Home} />
                     <Route path='/login' component={Login} />
+                    <Route path = '/regprofile/:user' component ={RglrProfile} /> 
                     <Route path='/signup' component={SignUp} />
                     <Route path='/restprofile/:restname/:zip' component={RestPageShow} />
                     <Route exact path='/restshow' component={RestShow} />

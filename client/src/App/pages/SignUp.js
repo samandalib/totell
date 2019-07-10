@@ -19,7 +19,7 @@ class SignUp extends Component{
     render(){
         return(
             <div>
-                <form action="/usereg" method="POST">
+                <form action="/signup" method="POST">
                     <label>
                         Username:
                         <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
