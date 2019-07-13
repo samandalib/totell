@@ -42,10 +42,10 @@ var gallerySchema=new Schema({
 })
 
 var followersSchema = new Schema({
-    userName:{type:String},
+    userId:{type:Schema.Types.ObjectId, ref: 'User'},
 })
 var restaurantSchema = new Schema({
-    _owner:{type:Number , ref:'User'},
+    _owner:{type:String , ref:'User'},
     _id:{type:Schema.Types.ObjectId},
     name:{type:String, required:true},
     country:{type:String},

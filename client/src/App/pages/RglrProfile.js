@@ -17,24 +17,32 @@ class RglrProfile extends Component{
         fetch(route)
             .then(res => res.json(res))
             .then(data => {
-                console.log('data following : ', data.following.length, data.following[0]._id)
-                let followings = []
-                let username = data.username
-                for (let i=0; i<data.following.length; i++){
-                    followings.push(data.following[i]._id)
-                }
-                console.log(`followings in fetch: ${followings}`,typeof(followings))
-                this.setState(
-                    {username:username, followings:followings},
-                    ()=> {
-                        this.state.followings.forEach((i)=>{
-                            let restRoute = `/getrestinfo/${i}`
-                            this.getRestInfo(restRoute)
-                        })
 
-                        console.log(`data: ${data} username: ${username} followings:${followings}`)
+                if (!data.following || data.following.length == 0){
+                    let username = data.username
+                    let followings = []
+                    this.setState({username:username, followings:followings})
+                }else{
+                    console.log('data following : ', data.following.length, data.following[0]._id)
+                    let followings = []
+                    let username = data.username
+                    for (let i=0; i<data.following.length; i++){
+                        followings.push(data.following[i]._id)
                     }
-                )
+                    console.log(`followings in fetch: ${followings}`,typeof(followings))
+                    this.setState(
+                        {username:username, followings:followings},
+                        ()=> {
+                            this.state.followings.forEach((i)=>{
+                                let restRoute = `/getrestinfo/${i}`
+                                this.getRestInfo(restRoute)
+                            })
+
+                            console.log(`data: ${data} username: ${username} followings:${followings}`)
+                        }
+                    )
+                }
+
             })
 
     }

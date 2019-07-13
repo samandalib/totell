@@ -5,6 +5,7 @@ import ProfileInfo from './reactComponents/RestProfile/ProfileInfo.js'
 import RestBoard from './reactComponents/RestProfile/RestBoard.js'
 import CommentsBox from './reactComponents/RestProfile/CommentsBox.js'
 import PhotoGallery from './reactComponents/RestProfile/PhotoGallery.js'
+import SearchBox from './SearchBox.js'
 
 class RestPageShow extends Component{
     constructor(props){
@@ -92,6 +93,7 @@ class RestPageShow extends Component{
                     <Link to={menuRoute}>
                         <button>SHOW MENU </button>
                     </Link>
+                    <SearchBox />
 
                 </div>
 
@@ -105,7 +107,7 @@ class RestPageShow extends Component{
                     <Link to={menuRoute}>
                         <button>SHOW MENU </button>
                     </Link>
-
+                    <SearchBox />
                 </div>
 
             )

@@ -6,7 +6,7 @@ mongoose.connect("mongodb+srv://hesamandalib:hesam14239@restaurant-7f8ln.mongodb
 var Schema=mongoose.Schema;
 
 var followingSchema = new Schema({
-    pageName:{type:String},
+    restaurants:[{type:Schema.Types.ObjectId, ref:'Restaurants'}],
     startDate:{type:Date, default:Date.now}
 })
 
