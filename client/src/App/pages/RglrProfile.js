@@ -32,6 +32,7 @@ class RglrProfile extends Component{
                     console.log(`followings in fetch: ${followings}`,typeof(followings))
                     this.setState(
                         {username:username, followings:followings},
+/*
                         ()=> {
                             this.state.followings.forEach((i)=>{
                                 let restRoute = `/getrestinfo/${i}`
@@ -40,6 +41,7 @@ class RglrProfile extends Component{
 
                             console.log(`data: ${data} username: ${username} followings:${followings}`)
                         }
+*/
                     )
                 }
 

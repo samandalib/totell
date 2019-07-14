@@ -96,11 +96,12 @@ app.get('/getrestinfo/:id', callbacks.getRoutes.getRestInfo)
 app.get('/checkfollow/:restname/:restzip', callbacks.getRoutes.getFollowStatus)
 app.get('/followings/:user', callbacks.getRoutes.getFollowings)
 app.get('/menuform/:restaurant/:zip', callbacks.getRoutes.getRestMenu)
+app.get('/getrestbrief/:id', callbacks.getRoutes.getRestBrief)
 /*
 app.put('/menuform/:restaurant/:zip', callbacks.putRoutes.putRestaurantMenu)
 */
 
-app.put('/putfollow/name/:restname/zip/:restzip/follow/:followstatus', callbacks.putRoutes.putFollow)
+app.put('/putfollow/:restname/:restzip/:followstatus', callbacks.putRoutes.putFollow)
 /*
 app.put('/updateuserdb/:restname', callbacks.putRoutes.putUserFollowing)
 */

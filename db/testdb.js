@@ -3,25 +3,30 @@ let Users = require('./user.js')
 var ObjectId = require('mongodb').ObjectId;
 
 
-
-Restaurant.find({name:"Brick Oven Restaurant"/*Take it from url params*/}, (err,result)=>{
-        if (err) console.log('error in find query: ', err)
-        result[0].followers.push(ObjectId("5d233beaa3cbc73be4ff0e26"/*Take it from session*/))
-        console.log('Result[0] is: ', result[0])
-        let res_id = result[0]._id
-        console.log(`res_id: ${res_id}`)
-        Restaurant.replaceOne({name:"Brick Oven Restaurant"},result[0], (error,rslt)=>{
-            if (error) res.status(500).send('Error in update query: ', error)
-            console.log('Record Successfully replaced: ', rslt)
-            console.log('rslt[0]: ',rslt[0])
-        })
-        Users.find({username: "hesam"/*Take it from session*/}, (error, res)=>{
-            if (error) console.log('error in Users.find: ', error)
-            console.log(`res in Users.find: ${res}`)
-            res[0].following.push(res_id)
-        })
-
+Restaurant.updateMany({}, {$set:{country:"United States of America"}},(err, result)=>{
+    if (err) console.log('cannot update many documents : ',err)
+    console.log('updated many documents: ', result)
+    process.exit()
 })
+//Restaurant.find({name:"Brick Oven Restaurant"/*Take it from url params*/}, (err,result)=>{
+//        if (err) console.log('error in find query: ', err)
+//        result[0].followers.push(ObjectId("5d233beaa3cbc73be4ff0e26"/*Take it from session*/))
+//        console.log('Result[0] is: ', result[0])
+//        let res_id = result[0]._id
+//        console.log(`res_id: ${res_id}`)
+//        Restaurant.replaceOne({name:"Brick Oven Restaurant"},result[0], (error,rslt)=>{
+//            if (error) res.status(500).send('Error in update query: ', error)
+//            console.log('Record Successfully replaced: ', rslt)
+//            console.log('rslt[0]: ',rslt[0])
+//        })
+//        Users.find({username: "hesam"/*Take it from session*/}, (error, res)=>{
+//            if (error) console.log('error in Users.find: ', error)
+//            console.log(`res in Users.find: ${res}`)
+//            res[0].following.push(res_id)
+//        })
+
+//})
+
 /*
 let updatedObj = orgnlObject[0].followers.push(ObjectId("5d233beaa3cbc73be4ff0e26"))
 console.log('updatedObj: ', updatedObj)

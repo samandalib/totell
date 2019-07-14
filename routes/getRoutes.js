@@ -189,13 +189,39 @@ res.redirect(route)
     getFollowStatus(req,res){
         let restName = req.params.restname
         let restZip = req.params.restzip
+        restName = new RegExp(".*"+restName+".*", "i")
+        restZip = new RegExp(".*"+restZip+".*", "i")
+        let restQuery = {$and:[{name:{$regex:restName}},{zip:{$regex:restZip}}]}
         let user = req.session.user.username
-        console.log('user at getFollowStatus: ', user)
-        req.user_db.find({name:user},{following:1},(err,result)=>{
-            if (err){res.status(500).send('Error in checking follow status ',err)}
-            console.log('result from getFollowStatus: ', result)
-            res.send(result)
+        console.log(`user at getFollowStatus: ${user}` )
+        req.restaurant_db.find(restQuery, (err,foundRest)=>{
+            if (err) res.status(500).send('Error in Restaurant find query: ', err)
+            let followers = foundRest[0].followers
+            req.user_db.find({username:user},(err,foundUser)=>{
+                if (err) res.status(500).send('Error in finding user ',err)
+                console.log(`foundUser is ${foundUser}`)
+                let user_id = foundUser[0].valueOf()._id.toString()
+                let checkExistence = 0
+                console.log(`followers : ${followers}`)
+                for (let i=0; i<followers.length; i++){
+                    console.log(`${i}. ${followers[i]._id} and ${user_id} `,followers[i].valueOf()._id.toString() == user_id )
+                    if(followers[i].valueOf()._id.toString() == user_id){
+                        checkExistence ++
+                    }
+                }
+                console.log(`CheckExistence: ${checkExistence}`)
+/*
+                console.log(`user_id at getFollowStatus: ${user_id}`, typeof(user_id))
+                console.log('followers.indexOf(user_id): ', followers.indexOf(user_id))
+*/
+                if (!checkExistence){
+                    res.status(200).send([{followStatus:0}])
+                } else{
+                    res.status(200).send([{followStatus:1}])
+                }
+            })
         })
+
     },
 
     getFollowings(req,res){
@@ -212,6 +238,19 @@ res.redirect(route)
         } else {
             res.status(403).send('unauthorized request!')
         }
+    },
+
+    getRestBrief(req,res){
+        restId = req.ObjectId(req.params.id)
+        console.log(`restId at getRestBrief: ${restId}`)
+        queryObject = {"_id": restId}
+        console.log(`queryObject at getRestBrief: ${queryObject}`)
+        req.restaurant_db.findOne(queryObject, {name:1, country:1,state:1, city:1, zip:1}, (err, foundRestaurant)=>{
+            if (err) res.status(500).send('error in finding restaurant with its _id: ',err)
+            console.log(`foundRestaurant at getRestBrief: ${foundRestaurant}`)
+            res.status(200).send(foundRestaurant)
+        })
+
     }
 
 }

@@ -18,16 +18,20 @@ class RestPageShow extends Component{
             },
 
             followStatus:0,
-            isfollower:0,
+
         }
         this.handleFollow=this.handleFollow.bind(this)
+        this.handleUnfollow = this.handleUnfollow.bind(this)
     }
+    //CHECK TO SEE IF THE USER IN SESSION FOLLOWS THE PAGE OF THIS RESTAURANT, IT EFFECTS THE STATUS OF THE FOLLOW BUTTON
     checkFollowStatus(){
         let route = `/checkfollow/${this.props.match.params.restname}/${this.props.match.params.zip}`
         fetch(route)
             .then(res => res.json())
-            .then(data => console.log(`from checkFollowStatus: ${data}`))
+            .then(data => this.setState({followStatus:data[0].followStatus}, ()=>console.log(`from checkFollowStatus: ${this.state.followStatus}`)))
     }
+
+    //GET SOME GENERAL INFORMATION ABOUT THE RESTAURANT THAT THE USER SELECTED TO VISIT ITS PAGE
     getPartialData(route){
         console.log('starting fetch')
         fetch(route)
@@ -36,7 +40,8 @@ class RestPageShow extends Component{
 
     }
 
-    updateData(data, route){
+    //IF THE USER FOLLOW/UNFOLLOW THE PAGE, THE DATA ON DB MUST BE UPDATED
+    updateData(data, followStatus, route){
         console.log('FROM updateData route: ',route)
         fetch(route,{
             method: 'PUT',
@@ -47,37 +52,41 @@ class RestPageShow extends Component{
             }
         })
             .then(res => {
-                this.setState({followStatus:1})
+                this.setState({followStatus:followStatus})
                 console.log('response from fetch in updateData: ', res)
             })
-            .then(()=>console.log('updated!!!'))
+            .then(()=>console.log('data updated on database!!!'))
             .catch(error => console.log('Error in Updating data:', error))
+    }
+    handleFollow(){
+        let followStatus = 1
+        console.log('followStatus from handleFollow changed to: ', followStatus)
+        //follow the page
+        let route = `/putfollow/${this.state.data.name}/${this.state.data.zip}/${followStatus}`
+        console.log('route from handleFollow: ', route)
+        this.updateData(this.state.data, followStatus, route)
+    }
+
+    handleUnfollow(){
+        let followStatus = 0
+        let data = this.state.data
+        let name = data.name
+        let zip = data.zip
+
+        console.log('followStatus from handleUnfollow changed to: ', followStatus)
+        let route = `/putfollow/${name}/${zip}/${followStatus}`
+        console.log('route from handleFollow: ', route)
+        this.updateData(data, 0, route)
     }
 
     componentDidMount(){
         this.checkFollowStatus()
         let route = `/restprofile/${this.props.match.params.restname}/${this.props.match.params.zip}`
-        console.log('route to fetch: ', route)
+        console.log('route to fetch after componend did mount: ', route)
         this.getPartialData(route)
 
     }
 
-    handleFollow(){
-        console.log('followStatus: ', this.state.followStatus)
-        let followStatus = this.state.followStatus
-        let activeUser = this.state.isfollower
-        if (!followStatus || !activeUser){
-            //follow the page
-            let route = `/putfollow/name/${this.state.data.name}/zip/${this.state.data.zip}/follow/${followStatus}`
-            console.log('route from handleFollow: ', route)
-            this.updateData(this.state.data,route)
-        } else{
-            //unfollow the page
-        }
-    }
-    handleUnfollow(){
-
-    }
     render(){
         let name = this.props.match.params.restname
         let zip = this.props.match.params.zip
@@ -111,7 +120,7 @@ class RestPageShow extends Component{
                 </div>
 
             )
+        }
     }
-}
 }
 export default RestPageShow
