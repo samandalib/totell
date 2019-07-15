@@ -251,6 +251,41 @@ res.redirect(route)
             res.status(200).send(foundRestaurant)
         })
 
+    },
+
+    getUserInfo(req,res){
+        if (req.session.user){
+            let username = req.session.user.username
+            console.log(`username at getUserInfo: ${username}`)
+            res.status(200).send({username:username})
+        } else{
+            res.status(404).send('No Active Session')
+        }
+    },
+
+    getFollowCount(req,res){
+        if (req.params.name && req.params.zip){
+            console.log("running if section of getFollowCount callback")
+            let restName = req.params.name
+            let restZip = req.params.zip
+            restName = new RegExp(".*"+name+".*", "i")
+            restZip = new RegExp(".*"+zip+".*", "i")
+            let restQuery = {$and:[{name:{$regex:restName}},{zip:{$regex:restZip}}]}
+            req.restaurant_db.findOne(restQuery, {followers:1}, (err, foundRest)=>{
+                if (err) res.status(500).send(`error in find query for followCount of Restaurant ${err}`)
+                console.log(`FoundRest at getFollowCount: ${foundRest}`)
+
+                res.status(200).send(foundRest[0])
+            })
+        } else if (req.params.name && !req.params.zip){
+            console.log("running elseif section of getFollowCount callback")
+            req.user_db.findOne({username:req.params.name}, {following:1}, (error, foundUser)=>{
+                if (error) res.status(500).send(`error in find query for followCount of User ${error}`)
+                console.log(`FoundUser at getFollowCount: ${foundUser}`)
+                res.status(200).send(foundUser[0])
+            })
+        }
+
     }
 
 }

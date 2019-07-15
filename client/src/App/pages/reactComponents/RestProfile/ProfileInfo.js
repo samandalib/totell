@@ -1,7 +1,15 @@
 import React, {Component} from 'react';
 
+import FollowCount from '../followCount.js'
+
 class ProfileInfo extends Component{
+    constructor(props){
+        super(props)
+
+    }
     render(){
+        //
+
         return(
             <div>
                 <h1 id="restaurantName">{this.props.data.name}</h1>
@@ -11,6 +19,8 @@ class ProfileInfo extends Component{
                 <p className="info">Currency: {this.props.data.currency}</p>
                 <p className="info"> {this.props.data.website}</p>
                 <p className="info"> Followers: {this.props.data.followers.length}</p>
+
+
 
 
             </div>

@@ -6,6 +6,7 @@ import RestBoard from './reactComponents/RestProfile/RestBoard.js'
 import CommentsBox from './reactComponents/RestProfile/CommentsBox.js'
 import PhotoGallery from './reactComponents/RestProfile/PhotoGallery.js'
 import SearchBox from './SearchBox.js'
+import FollowCount from './reactComponents/followCount.js'
 
 class RestPageShow extends Component{
     constructor(props){
@@ -18,6 +19,7 @@ class RestPageShow extends Component{
             },
 
             followStatus:0,
+            activeUser:""
 
         }
         this.handleFollow=this.handleFollow.bind(this)
@@ -29,6 +31,18 @@ class RestPageShow extends Component{
         fetch(route)
             .then(res => res.json())
             .then(data => this.setState({followStatus:data[0].followStatus}, ()=>console.log(`from checkFollowStatus: ${this.state.followStatus}`)))
+    }
+
+    getUserInfo(){
+        console.log('getUserInfo execution')
+        let route = "/getuserinfo"
+        fetch(route)
+            .then(res => res.json())
+            .then(data => {
+                this.setState({activeUser:data.username})
+                console.log(`data in getUserInfo ${data.username}`)
+            })
+            .catch(error => console.log(`Error in getUserInfo ${error}`))
     }
 
     //GET SOME GENERAL INFORMATION ABOUT THE RESTAURANT THAT THE USER SELECTED TO VISIT ITS PAGE
@@ -81,9 +95,11 @@ class RestPageShow extends Component{
 
     componentDidMount(){
         this.checkFollowStatus()
+        this.getUserInfo()
         let route = `/restprofile/${this.props.match.params.restname}/${this.props.match.params.zip}`
         console.log('route to fetch after componend did mount: ', route)
         this.getPartialData(route)
+
 
     }
 
@@ -91,17 +107,33 @@ class RestPageShow extends Component{
         let name = this.props.match.params.restname
         let zip = this.props.match.params.zip
         let menuRoute = `/menu/${name}/${zip}`
+
+        let activeUser = this.state.activeUser
+        let userRoute = `/regprofile/${activeUser}`
+
         console.log(`menuRoute: ${menuRoute}`)
         console.log(`followStatus at render: ${this.state.followStatus}`)
+
+        let followCountPath = `/${this.state.data.name}/${this.state.data.zip}`
+        console.log(`from profileInfo followCountPath: ${followCountPath}`)
+        ////////////UNSUCCESSFULL ATTEMPT TO USE AJAX///////////////////////////
+        //<FollowCount subject="Followers Component: " path={followCountPath} />
+        ////////////////////////////////////////////////////////////////////////
         if (this.state.followStatus){
             return(
                 <div>
                     <h1> TOTELL </h1>
+                    <h4>{this.state.activeUser.toUpperCase()}</h4>
+                    <Link to={userRoute}>
+                        <button>My Profile</button>
+                    </Link>
                     <ProfileInfo  data={this.state.data}/>
+
                     <button onClick={this.handleUnfollow}>Following</button>
                     <Link to={menuRoute}>
                         <button>SHOW MENU </button>
                     </Link>
+
                     <SearchBox />
 
                 </div>
@@ -111,12 +143,19 @@ class RestPageShow extends Component{
             return(
                 <div>
                     <h1> TOTELL </h1>
+                    <h4>{this.state.activeUser.toUpperCase()}</h4>
+                    <Link to={userRoute}>
+                        <button>My Profile</button>
+                    </Link>
                     <ProfileInfo  data={this.state.data}/>
+
                     <button onClick={this.handleFollow}>Follow</button>
                     <Link to={menuRoute}>
                         <button>SHOW MENU </button>
                     </Link>
+
                     <SearchBox />
+
                 </div>
 
             )

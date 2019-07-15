@@ -97,6 +97,8 @@ app.get('/checkfollow/:restname/:restzip', callbacks.getRoutes.getFollowStatus)
 app.get('/followings/:user', callbacks.getRoutes.getFollowings)
 app.get('/menuform/:restaurant/:zip', callbacks.getRoutes.getRestMenu)
 app.get('/getrestbrief/:id', callbacks.getRoutes.getRestBrief)
+app.get('/getuserinfo', callbacks.getRoutes.getUserInfo)
+app.get('/getfollowcount/:name', callbacks.getRoutes.getFollowCount)
 /*
 app.put('/menuform/:restaurant/:zip', callbacks.putRoutes.putRestaurantMenu)
 */

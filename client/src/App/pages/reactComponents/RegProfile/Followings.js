@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom'
 
 import Waiting from '../Waiting.js';
-
+import RestMenu from '../RestMenu.js'
 class Followings extends Component{
     constructor(props){
         super(props)
@@ -18,8 +19,10 @@ class Followings extends Component{
             fetch(route)
                 .then(res => res.json())
                 .then(data=> {
-                    console.log(`data in getFollowingsDetails ${data.name}`)
-                    followingsDetList.push({data})
+                    console.log(`data in getFollowingsDetails ${data.name} , ${data.country}, ${data.state}, ${data.city}, ${data.zip}`)
+                    followingsDetList.push([data.name, data.country, data.state, data.city,data.zip])
+                    console.log(`followingsDetList inside fetch: ${followingsDetList}`)
+                    this.setState({followings:followingsDetList}, ()=>console.log('this.setState at getFollowingsDetails', this.state.followings))
                 })
 /*
                 .then(result=>this.setState({followings:result},()=>{
@@ -30,7 +33,7 @@ class Followings extends Component{
         }
         //console.log(`followingsDetList: ${followingsDetList}`)
 
-        this.setState({followings:followingsDetList}, ()=>console.log('this.setState at getFollowingsDetails', this.state.followings))
+
     }
     componentDidMount(){
         this.getFollowingsDetails()
@@ -53,13 +56,33 @@ class Followings extends Component{
         }else{
             return(
                 <div>
-                <h3>Following Restaruants</h3>
-                <p> You are following {this.props.data.length} restaurnats </p>
-                <ul>
-                {this.state.followings.map((i)=>{
-                    return <li>{i.name}</li>
-                })}
-                </ul>
+                    <h3>Following Restaruants</h3>
+                    <p> You are following {this.props.data.length} restaurnats </p>
+                    <table>
+                    <thead>
+                        <th>Name </th>
+                        <th>Country</th>
+                        <th>State </th>
+                        <th>City </th>
+                        <th>Zip </th>
+                    </thead>
+                    <tbody>
+                    {this.state.followings.map((i)=>{
+                        return(
+
+                        <tr>
+                            <Link to={`/restProfile/${i[0]}/${i[4]}`}>
+                                <td>{i[0]}</td>
+                            </Link>
+                            <td>{i[1]}</td>
+                            <td>{i[2]}</td>
+                            <td>{i[3]}</td>
+                            <td>{i[4]}</td>
+                        </tr>
+                    )
+                    })}
+                    </tbody>
+                    </table>
                 </div>
 
             )
