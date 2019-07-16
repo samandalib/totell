@@ -1,3 +1,52 @@
+#main-title{
+    font-family: "century gothic";
+    font-size: 100px;
+    font-weight: 800;
+    text-align: center;
+    color:#A93226  ;
+    padding-bottom: 2%;
+    padding-left: 2%;
+}
+
+#loginbut{
+    background-color: #A93226;
+    border-color: #A93226;
+    margin-left: 1px
+}
+#logoutbut{
+    background-color: #A93226;
+    border-color: #A93226;
+    margin-left: 1px
+}
+#logoutform{
+  position: absolute;
+  top: 8px;
+  right: 35px;
+}
+#signupbut{
+    background-color: #A93226;
+    border-color: #A93226;
+    margin-left: 1px
+}
+#loginform{
+    align-content: center;
+}
+
+#wlcm{
+    font-weight: 300;
+    margin-top: 1%;
+}
+
+#srchfield{
+
+}
+
+#srchbut{
+    background-color: #A93226;
+    border-color: #A93226;
+    margin-left: 1px
+}
+
 #totell{
     font-family: "century gothic";
     font-size: 42px;

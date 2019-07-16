@@ -73,12 +73,24 @@ class RglrProfile extends Component{
         } else{
             return (
                 <div>
-                    <p>Welcome {this.state.username}</p>
-                    <SearchBox />
-                    <Followings data = {this.state.followings} />
-                    <form action="/logout" method="POST">
-                        <button type='submit'> Log out </button>
-                    </form>
+                    <div className="container" >
+                        <div className="grid">
+                            <div className="row">
+                                <h5 id="wlcm">Welcome <strong> {this.state.username}</strong></h5>
+
+                                <form id="logoutform" action="/logout" method="POST">
+                                    <button className="btn btn-primary" id="logoutbut" type='submit'> Log out </button>
+                                </form>
+                            </div>
+
+                            <div className="row" style={{backgroundColor:"red"}}>
+                                <SearchBox />
+                            </div>
+
+                            <Followings data = {this.state.followings} />
+
+                        </div>
+                    </div>
                 </div>
 
             )

@@ -2,6 +2,7 @@ import React, { Component }from 'react';
 import { render } from 'react-dom'
 import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 
+import './bootstrap/bootstrap.css';
 import './style.css';
 
 import RestaurantForm from './pages/RestForm';
@@ -26,7 +27,7 @@ class App extends Component{
                 <Switch>
                     <Route exact path='/' component={Home} />
                     <Route path='/login' component={Login} />
-                    <Route path = '/regprofile/:user' component ={RglrProfile} /> 
+                    <Route path = '/regprofile/:user' component ={RglrProfile} />
                     <Route path='/signup' component={SignUp} />
                     <Route path='/restprofile/:restname/:zip' component={RestPageShow} />
                     <Route exact path='/restshow' component={RestShow} />

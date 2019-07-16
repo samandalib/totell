@@ -1,6 +1,7 @@
 import React from 'react';
 import countries from './countries.js';
 
+
 class CountrySelector extends React.Component{
     constructor(props){
         super(props)
@@ -13,7 +14,7 @@ class CountrySelector extends React.Component{
     }
     render(){
         return(
-              <select id="country" value = {this.state.value} name="country" onChange={this.handleChange} >
+              <select className={this.props.className} id="country" value = {this.state.value} name="country" onChange={this.handleChange} >
                         {countries.map((i)=>
                                                 <option value={i.name}>{i.name}</option>
                                         )

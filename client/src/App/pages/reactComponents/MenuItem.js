@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import CurrencySelector from './CurrencySelector';
+import CurrencySelector from './CurrencySelector.js';
 import IngredientTooltip from './Tooltip.jsx';
 
 class MenuItem extends Component{//IT IS USED IN MenuShow.js

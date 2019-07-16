@@ -58,13 +58,13 @@ class Followings extends Component{
                 <div>
                     <h3>Following Restaruants</h3>
                     <p> You are following {this.props.data.length} restaurnats </p>
-                    <table>
+                    <table className="table">
                     <thead>
-                        <th>Name </th>
-                        <th>Country</th>
-                        <th>State </th>
-                        <th>City </th>
-                        <th>Zip </th>
+                        <th scope="col">Name </th>
+                        <th scope="col">Country</th>
+                        <th scope="col">State </th>
+                        <th scope="col">City </th>
+                        <th scope="col">Zip </th>
                     </thead>
                     <tbody>
                     {this.state.followings.map((i)=>{
@@ -72,7 +72,7 @@ class Followings extends Component{
 
                         <tr>
                             <Link to={`/restProfile/${i[0]}/${i[4]}`}>
-                                <td>{i[0]}</td>
+                                <td scope="row">{i[0]}</td>
                             </Link>
                             <td>{i[1]}</td>
                             <td>{i[2]}</td>
