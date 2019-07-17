@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 
 import Waiting from '../Waiting.js';
 import RestMenu from '../RestMenu.js'
+
 class Followings extends Component{
     constructor(props){
         super(props)
@@ -19,8 +20,8 @@ class Followings extends Component{
             fetch(route)
                 .then(res => res.json())
                 .then(data=> {
-                    console.log(`data in getFollowingsDetails ${data.name} , ${data.country}, ${data.state}, ${data.city}, ${data.zip}`)
-                    followingsDetList.push([data.name, data.country, data.state, data.city,data.zip])
+                    console.log(`data in getFollowingsDetails ${data.name} ,${data.type}, ${data.country}, ${data.state}, ${data.city}, ${data.zip}`)
+                    followingsDetList.push([data.name, data.type, data.country, data.state, data.city,data.zip])
                     console.log(`followingsDetList inside fetch: ${followingsDetList}`)
                     this.setState({followings:followingsDetList}, ()=>console.log('this.setState at getFollowingsDetails', this.state.followings))
                 })
@@ -61,6 +62,7 @@ class Followings extends Component{
                     <table className="table">
                     <thead>
                         <th scope="col">Name </th>
+                        <th scope="col">Type </th>
                         <th scope="col">Country</th>
                         <th scope="col">State </th>
                         <th scope="col">City </th>
@@ -71,13 +73,14 @@ class Followings extends Component{
                         return(
 
                         <tr>
-                            <Link to={`/restProfile/${i[0]}/${i[4]}`}>
+                            <Link to={`/restprofile/${i[0]}/${i[5]}`}>
                                 <td scope="row">{i[0]}</td>
                             </Link>
                             <td>{i[1]}</td>
                             <td>{i[2]}</td>
                             <td>{i[3]}</td>
                             <td>{i[4]}</td>
+                            <td>{i[5]}</td>
                         </tr>
                     )
                     })}

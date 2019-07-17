@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 
+import NavBar from './reactComponents/NavBar.js';
 import ProfileInfo from './reactComponents/RestProfile/ProfileInfo.js'
 import RestBoard from './reactComponents/RestProfile/RestBoard.js'
 import CommentsBox from './reactComponents/RestProfile/CommentsBox.js'
 import PhotoGallery from './reactComponents/RestProfile/PhotoGallery.js'
 import SearchBox from './SearchBox.js'
-import FollowCount from './reactComponents/followCount.js'
+import Waiting from './reactComponents/Waiting.js';
 
 class RestPageShow extends Component{
     constructor(props){
@@ -104,62 +105,65 @@ class RestPageShow extends Component{
     }
 
     render(){
+
         let name = this.props.match.params.restname
         let zip = this.props.match.params.zip
         let menuRoute = `/menu/${name}/${zip}`
 
         let activeUser = this.state.activeUser
-        let userRoute = `/regprofile/${activeUser}`
 
         console.log(`menuRoute: ${menuRoute}`)
         console.log(`followStatus at render: ${this.state.followStatus}`)
 
-        let followCountPath = `/${this.state.data.name}/${this.state.data.zip}`
-        console.log(`from profileInfo followCountPath: ${followCountPath}`)
-        ////////////UNSUCCESSFULL ATTEMPT TO USE AJAX///////////////////////////
-        //<FollowCount subject="Followers Component: " path={followCountPath} />
-        ////////////////////////////////////////////////////////////////////////
-        if (this.state.followStatus){
-            return(
-                <div>
-                    <h1> TOTELL </h1>
-                    <h4>{this.state.activeUser.toUpperCase()}</h4>
-                    <Link to={userRoute}>
-                        <button>My Profile</button>
-                    </Link>
-                    <ProfileInfo  data={this.state.data}/>
 
-                    <button onClick={this.handleUnfollow}>Following</button>
-                    <Link to={menuRoute}>
-                        <button>SHOW MENU </button>
-                    </Link>
+        if(!this.state.data.name){
+            return <Waiting />
+        }else{
+            if (this.state.followStatus){
+                return(
+                    <div>
+                        <NavBar username={this.state.activeUser} />
 
-                    <SearchBox />
+                        <div className="container"  style={{marginTop:"10%"}}>
+                            <div className="grid">
 
-                </div>
+                                <div className="row">
+                                    <ProfileInfo  data={this.state.data}/>
 
-            )
-        } else{
-            return(
-                <div>
-                    <h1> TOTELL </h1>
-                    <h4>{this.state.activeUser.toUpperCase()}</h4>
-                    <Link to={userRoute}>
-                        <button>My Profile</button>
-                    </Link>
-                    <ProfileInfo  data={this.state.data}/>
 
-                    <button onClick={this.handleFollow}>Follow</button>
-                    <Link to={menuRoute}>
-                        <button>SHOW MENU </button>
-                    </Link>
 
-                    <SearchBox />
+                                    <button className="btn btn-primary" onClick={this.handleUnfollow}>Following</button>
+                                    <Link to={menuRoute}>
+                                        <button className="btn btn-primary">SHOW MENU </button>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
 
-                </div>
+                        <SearchBox />
 
-            )
+                    </div>
+                )
+            } else{
+                return(
+                    <div>
+                        <NavBar username={this.state.activeUser} />
+                        <ProfileInfo  data={this.state.data}/>
+
+                        <button className="btn btn-primary" id="followbut" onClick={this.handleFollow}>Follow</button>
+                        <Link to={menuRoute}>
+                            <button id="exploreMenuButt" className="btn btn-primary">SHOW MENU </button>
+                        </Link>
+
+                        <SearchBox />
+
+                    </div>
+
+                )
+            }
         }
+
+
     }
 }
 export default RestPageShow

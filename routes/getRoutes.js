@@ -63,8 +63,8 @@ res.redirect(route)
         let filterRegex= new RegExp(".*"+filter+".*", "i")
         console.log(`filterRegex : ${filterRegex}`)
         req.restaurant_db.find(
-            {'$or':[{name:{$regex: filterRegex}},{address:{$regex: filterRegex}},{city:{$regex: filterRegex}},{state:{$regex: filterRegex}}]},
-            {"name":1, "state":1, "city":1, "address":1, "zip":1, },
+            {'$or':[{name:{$regex: filterRegex}},{address:{$regex: filterRegex}},{city:{$regex: filterRegex}},{state:{$regex: filterRegex}},{type:{$regex: filterRegex}}]},
+            {"name":1, "state":1, "city":1, "address":1, "zip":1, "type":1},
             (err,result)=>{
                 if (err){
                     res.type('html').status(500);
@@ -113,7 +113,8 @@ res.redirect(route)
         let restNameRegex= new RegExp(".*"+restaurant+".*", "i")
         let restZipRegex = new RegExp(".*"+zip+".*", "i")
         console.log('From getRestMenu: ', restaurant)
-        req.restaurant_db.findOne({$and:[{name:{$regex:restNameRegex}},{zip:{$regex:restZipRegex}}]},
+        req.restaurant_db.findOne(
+            {$and:[{name:{$regex:restNameRegex}},{zip:{$regex:restZipRegex}}]},
             (err,result)=>{
             if (err){
                 res.type('html').status(500);
@@ -245,7 +246,7 @@ res.redirect(route)
         console.log(`restId at getRestBrief: ${restId}`)
         queryObject = {"_id": restId}
         console.log(`queryObject at getRestBrief: ${queryObject}`)
-        req.restaurant_db.findOne(queryObject, {name:1, country:1,state:1, city:1, zip:1}, (err, foundRestaurant)=>{
+        req.restaurant_db.findOne(queryObject, {name:1, country:1,state:1, city:1, zip:1, type:1}, (err, foundRestaurant)=>{
             if (err) res.status(500).send('error in finding restaurant with its _id: ',err)
             console.log(`foundRestaurant at getRestBrief: ${foundRestaurant}`)
             res.status(200).send(foundRestaurant)
@@ -266,18 +267,22 @@ res.redirect(route)
     getFollowCount(req,res){
         if (req.params.name && req.params.zip){
             console.log("running if section of getFollowCount callback")
+
             let restName = req.params.name
             let restZip = req.params.zip
             restName = new RegExp(".*"+name+".*", "i")
             restZip = new RegExp(".*"+zip+".*", "i")
             let restQuery = {$and:[{name:{$regex:restName}},{zip:{$regex:restZip}}]}
-            req.restaurant_db.findOne(restQuery, {followers:1}, (err, foundRest)=>{
-                if (err) res.status(500).send(`error in find query for followCount of Restaurant ${err}`)
-                console.log(`FoundRest at getFollowCount: ${foundRest}`)
 
+            req.restaurant_db.findOne(restQuery, {followers:1}, (err, foundRest)=>{
+                if (err) {
+                    res.status(500).send(`error in find query for followCount of Restaurant ${err}`)
+                }
+                console.log(`FoundRest at getFollowCount: ${foundRest}`)
                 res.status(200).send(foundRest[0])
             })
-        } else if (req.params.name && !req.params.zip){
+        /*
+} else if (req.params.name && !req.params.zip){
             console.log("running elseif section of getFollowCount callback")
             req.user_db.findOne({username:req.params.name}, {following:1}, (error, foundUser)=>{
                 if (error) res.status(500).send(`error in find query for followCount of User ${error}`)
@@ -285,7 +290,9 @@ res.redirect(route)
                 res.status(200).send(foundUser[0])
             })
         }
-
+*/
     }
+
+    },
 
 }

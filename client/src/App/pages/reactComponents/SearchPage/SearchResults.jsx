@@ -9,15 +9,24 @@ class SearchResults extends Component{//IT IS USED IN SearchBox.js
 
 
         return(
-            <div>
-                <p>The search result for {this.props.srchText}</p>
-                {this.props.results.map((r)=> {
-                    console.log('SearchResults.jsx r is: ',r)
-                    return(
-                        <SrchRsltUnit RestObject={r} />
-                    )
-                })
-                }
+            <div className="container">
+                <div className="grid">
+
+                    <div className="row">
+                        <p>{this.props.results.length} search results for <strong> {this.props.srchText} </strong> </p>
+                    </div>
+
+                    <div className="row">
+                        {this.props.results.map((r)=> {
+                            console.log('SearchResults.jsx r is: ',r)
+                            return(
+                                    <SrchRsltUnit RestObject={r} />
+                            )
+                        })
+                        }
+                    </div>
+
+                </div>
             </div>
         )
 

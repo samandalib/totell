@@ -3,6 +3,8 @@ import { render } from 'react-dom'
 import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
 
 import './bootstrap/bootstrap.css';
+import './bootstrap/bootstrap-grid.css';
+import './bootstrap/bootstrap-reboot.css';
 import './style.css';
 
 import RestaurantForm from './pages/RestForm';

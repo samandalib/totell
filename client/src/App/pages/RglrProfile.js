@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
+import NavBar from './reactComponents/NavBar.js'
 import SearchBox from './SearchBox.js'
 import Followings from './reactComponents/RegProfile/Followings.js'
 import Waiting from './reactComponents/Waiting.js'
+
 
 class RglrProfile extends Component{
     constructor(props){
@@ -71,23 +73,34 @@ class RglrProfile extends Component{
         if(!this.state.username){
             return <Waiting status="" />
         } else{
+/*
+            <div id="pageheader" className="row" style={{backgroundColor:"gray"}}>
+                <div className= "col-lg-3 col-sm-4">
+                    <h3 id="smalltotell">TOTELL</h3>
+                </div>
+                <div className= "col-lg-6 col-sm-4">
+                </div>
+                <div className= "col-lg-3 col-sm-4">
+                    <h5 id="wlcm">Welcome <strong> {this.state.username}</strong></h5>
+                    <form id="logoutform" action="/logout" method="POST">
+                        <button className="btn btn-primary" id="logoutbut" type='submit'> Log out </button>
+                    </form>
+                </div>
+
+            </div>
+*/
             return (
                 <div>
-                    <div className="container" >
+                    <NavBar username={this.state.username} />
+                    <div className="container"  style={{marginTop:"10%"}}>
                         <div className="grid">
                             <div className="row">
-                                <h5 id="wlcm">Welcome <strong> {this.state.username}</strong></h5>
-
-                                <form id="logoutform" action="/logout" method="POST">
-                                    <button className="btn btn-primary" id="logoutbut" type='submit'> Log out </button>
-                                </form>
-                            </div>
-
-                            <div className="row" style={{backgroundColor:"red"}}>
                                 <SearchBox />
                             </div>
 
-                            <Followings data = {this.state.followings} />
+                            <div className="row">
+                                <Followings data = {this.state.followings} />
+                            </div>
 
                         </div>
                     </div>

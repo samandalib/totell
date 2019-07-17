@@ -34,24 +34,60 @@ class SearchBox extends Component{
 
     render(){
         console.log('from render function at SearchBox.js', this.state.srchRslt)
-        if (!this.state.searchText && this.state.srchRslt.length==0){
+        if (!this.state.searchText){
             return (
-                <div>
-                    <SearchForm action={this.getList.bind(this)} srchText={this.setSearchText.bind(this)} resetResults={this.resetResults.bind(this)} />
+                <div className="container">
+                    <div className="grid">
+
+                        <div className="row">
+                            <SearchForm action={this.getList.bind(this)} srchText={this.setSearchText.bind(this)} resetResults={this.resetResults.bind(this)} />
+                        </div>
+
+                    </div>
+                </div>
+            )
+
+        } else if (!this.state.searchText && this.state.srchRslt.length==0){
+            return (
+                <div className="container">
+                    <div className="grid">
+
+                        <div className="row">
+                            <SearchForm action={this.getList.bind(this)} srchText={this.setSearchText.bind(this)} resetResults={this.resetResults.bind(this)} />
+                        </div>
+
+                    </div>
                 </div>
             )
         }else if(this.state.searchText && this.state.srchRslt.length==0){
             return(
-                <div>
-                    <SearchForm action={this.getList.bind(this)} srchText={this.setSearchText.bind(this)} resetResults={this.resetResults.bind(this)} />
-                    <p> Searching for {this.state.searchText} ... </p>
+                <div className="container">
+                    <div className="grid">
+
+                        <div className="row">
+                                <SearchForm action={this.getList.bind(this)} srchText={this.setSearchText.bind(this)} resetResults={this.resetResults.bind(this)} />
+                        </div>
+
+                        <div className="row">
+                                <p> Searching for <strong>{this.state.searchText}</strong> ... </p>
+                        </div>
+
+                    </div>
                 </div>
             )
         } else if (this.state.searchText && this.state.srchRslt.length>0){
             return(
-                <div>
-                    <SearchForm action={this.getList.bind(this)} srchText={this.setSearchText.bind(this)} resetResults={this.resetResults.bind(this)} />
-                    <SearchResults results={this.state.srchRslt}  srchText={this.state.searchText} />
+                <div className="container">
+                    <div className="grid">
+
+                        <div className="row">
+                            <SearchForm action={this.getList.bind(this)} srchText={this.setSearchText.bind(this)} resetResults={this.resetResults.bind(this)} />
+                        </div>
+
+                        <div className="row">
+                            <SearchResults results={this.state.srchRslt}  srchText={this.state.searchText} />
+                        </div>
+                    </div>
                 </div>
             )
         }

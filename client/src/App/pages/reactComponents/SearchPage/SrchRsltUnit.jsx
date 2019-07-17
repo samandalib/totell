@@ -10,10 +10,16 @@ class SrchRsltUnit extends  Component{//It is used in SearchResults.jsx
         this.state={show:0, fullData:[], route:""}
         this.handleClick = this.handleClick.bind(this)
     }
+
     handleClick(e){
-        let route = `/search/restaurant/${e.target.value}`
-        console.log(`route for expanding the menu ${route}`)
-        this.getFullData(route)
+        if (this.state.show == 0){
+            let route = `/search/restaurant/${this.props.RestObject.name}`
+            console.log(`route for expanding the menu ${route}`)
+            this.getFullData(route)
+        } else{
+            this.setState({show:0})
+        }
+
     }
 
     getFullData(route){
@@ -24,27 +30,34 @@ class SrchRsltUnit extends  Component{//It is used in SearchResults.jsx
             // this.setState({list}) is equal to this.setState({list:list})
             .catch( err => console.log('ERROR IN FETCH: ',err))
     }
-    closeMenu(){
-        this.setState({show:0})
-    }
+
 
     render(){
-        let route = `/restProfile/${this.props.RestObject.name}/${this.props.RestObject.zip}`
+
         console.log('render function at SrchRsltUnit.jsx: ',this.props.RestObject)
         if (this.state.show == 1){
             return(
                 <div>
+                    <input id="exploreMenuButt" type="button"  value="Close Menu" onClick={this.handleClick}/>
                     <RestMenu data = {this.state.fullData} />
-                    <input id="exploreMenuButt" type="button"  value="Close Menu" onClick={this.closeMenu.bind(this)}/>
+
                 </div>
             )
         }
         return (
-            <div>
-                <Link to={route}>
-                    <RestInfo  name={this.props.RestObject.name} state ={this.props.RestObject.state} city={this.props.RestObject.city} address={this.props.RestObject.address} zip={this.props.RestObject.zip} />
-                </Link>
-                <input id="exploreMenuButt" type="button"  value={this.props.RestObject.name} onClick={this.handleClick}/>
+            <div id="rsltunit" className="container" >
+                <div className="grid">
+
+                    <div className="row">
+                        <div className= "col-lg-9">
+                            <RestInfo  name={this.props.RestObject.name} type={this.props.RestObject.type} state ={this.props.RestObject.state} city={this.props.RestObject.city} address={this.props.RestObject.address} zip={this.props.RestObject.zip} />
+                        </div>
+
+                        <div className= "col-lg-3">
+                            <input className="btn btn-primary" id="exploreMenuButt" type="button"  value="Show Menu" onClick={this.handleClick}/>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         )

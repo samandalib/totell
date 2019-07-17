@@ -8,6 +8,12 @@
     padding-left: 2%;
 }
 
+#smalltotell{
+    font-family: "century gothic";
+    font-weight: 600;
+    color:#A93226  ;
+    padding-left:0px;
+}
 #loginbut{
     background-color: #A93226;
     border-color: #A93226;
@@ -16,17 +22,29 @@
 #logoutbut{
     background-color: #A93226;
     border-color: #A93226;
-    margin-left: 1px
+    margin-left: 1px;
+    margin-top:0px;
+    align-items:flex-end;
 }
 #logoutform{
-  position: absolute;
-  top: 8px;
-  right: 35px;
+  position: relative;
+  top: 0px;
+  right: 0px;
 }
 #signupbut{
     background-color: #A93226;
     border-color: #A93226;
     margin-left: 1px
+}
+
+#myprofile{
+    background-color: #A93226;
+    border-color: #A93226;
+
+}
+
+#pageheader{
+    padding:1%;
 }
 #loginform{
     align-content: center;
@@ -34,13 +52,52 @@
 
 #wlcm{
     font-weight: 300;
-    margin-top: 1%;
+    margin-top: 0%;
+    margin-right:0%;
+    vertical-align:middle;
 }
 
-#srchfield{
+#exploreMenuButt{
+    background-color: #A93226;
+    border-color: #A93226;
+    vertical-align:middle;
+}
+
+#followbut{
+    background-color: #A93226;
+    border-color: #A93226;
+    vertical-align:middle;
+}
+
+.resthead{
+    font-size: 24px;
+    font-family: arial,sans-serif;
+    line-height: 1.33;
+    font-weight: 300;
+}
+.restsubhead{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.33;
 
 }
 
+#rsltunit{
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #E5E7E9  ;
+    border-radius: 5px;
+    padding:2%;
+}
+
+.restinfo{
+    font-size: 16px;
+    font-weight: 300
+
+}
 #srchbut{
     background-color: #A93226;
     border-color: #A93226;
