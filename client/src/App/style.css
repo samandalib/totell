@@ -64,8 +64,11 @@
 }
 
 #followbut{
-    background-color: #A93226;
-    border-color: #A93226;
+
+}
+#unfollowbut{
+    background-color: #27AE60;
+    border-color: #27AE60;
     vertical-align:middle;
 }
 
@@ -82,6 +85,11 @@
 
 }
 
+#showMenubut{
+    width:100%;
+    background-color: #A93226;
+    border-color: #A93226;
+}
 #rsltunit{
 
     margin-top: 10px;
@@ -93,6 +101,15 @@
     padding:2%;
 }
 
+#restBrief{
+    padding: 2%;
+}
+#followbutton{
+    position: absolute;
+    top: 10%;
+    right: 16px;
+    font-size: 18px;
+}
 .restinfo{
     font-size: 16px;
     font-weight: 300

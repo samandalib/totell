@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 
 import NavBar from './reactComponents/NavBar.js';
+import FollowBut from './reactComponents/FollowBut.js'
 import ProfileInfo from './reactComponents/RestProfile/ProfileInfo.js'
 import RestBoard from './reactComponents/RestProfile/RestBoard.js'
 import CommentsBox from './reactComponents/RestProfile/CommentsBox.js'
@@ -20,11 +21,12 @@ class RestPageShow extends Component{
             },
 
             followStatus:0,
-            activeUser:""
+            activeUser:"",
+            wikidata:{}
 
         }
-        this.handleFollow=this.handleFollow.bind(this)
-        this.handleUnfollow = this.handleUnfollow.bind(this)
+        //this.handleFollow=this.handleFollow.bind(this)
+        //this.handleUnfollow = this.handleUnfollow.bind(this)
     }
     //CHECK TO SEE IF THE USER IN SESSION FOLLOWS THE PAGE OF THIS RESTAURANT, IT EFFECTS THE STATUS OF THE FOLLOW BUTTON
     checkFollowStatus(){
@@ -73,26 +75,17 @@ class RestPageShow extends Component{
             .then(()=>console.log('data updated on database!!!'))
             .catch(error => console.log('Error in Updating data:', error))
     }
-    handleFollow(){
-        let followStatus = 1
-        console.log('followStatus from handleFollow changed to: ', followStatus)
-        //follow the page
-        let route = `/putfollow/${this.state.data.name}/${this.state.data.zip}/${followStatus}`
-        console.log('route from handleFollow: ', route)
-        this.updateData(this.state.data, followStatus, route)
+
+/*
+    getWiki(route){
+      fetch(route,{ mode: 'no-cors'})
+        .then(res =>res.json())
+         .then(data =>
+             this.setState({wikiData:data},()=>console.log('setState,WikiData', this.state.wikiData))
+          )
     }
 
-    handleUnfollow(){
-        let followStatus = 0
-        let data = this.state.data
-        let name = data.name
-        let zip = data.zip
-
-        console.log('followStatus from handleUnfollow changed to: ', followStatus)
-        let route = `/putfollow/${name}/${zip}/${followStatus}`
-        console.log('route from handleFollow: ', route)
-        this.updateData(data, 0, route)
-    }
+*/
 
     componentDidMount(){
         this.checkFollowStatus()
@@ -100,7 +93,10 @@ class RestPageShow extends Component{
         let route = `/restprofile/${this.props.match.params.restname}/${this.props.match.params.zip}`
         console.log('route to fetch after componend did mount: ', route)
         this.getPartialData(route)
-
+        let apiUrl = "https://en.wikipedia.org/w/api.php action=query&revids=347819%7C5487%7C548945&format=jsonfm&formatversion=2"
+/*
+        this.getWiki(apiUrl)
+*/
 
     }
 
@@ -118,44 +114,71 @@ class RestPageShow extends Component{
 
         if(!this.state.data.name){
             return <Waiting />
+
         }else{
+
             if (this.state.followStatus){
+                //<button className="btn btn-primary" id="unfollowbut" onClick={this.handleUnfollow}>Following</button>
                 return(
                     <div>
                         <NavBar username={this.state.activeUser} />
 
-                        <div className="container"  style={{marginTop:"10%"}}>
+                        <div className="container-fluid"  style={{marginTop:"10%"}}>
                             <div className="grid">
 
                                 <div className="row">
-                                    <ProfileInfo  data={this.state.data}/>
 
-
-
-                                    <button className="btn btn-primary" onClick={this.handleUnfollow}>Following</button>
-                                    <Link to={menuRoute}>
-                                        <button className="btn btn-primary">SHOW MENU </button>
-                                    </Link>
+                                    <div id="followbutton">
+                                        <FollowBut data={this.state.data} followStatus= {this.state.followStatus} />
+                                    </div>
                                 </div>
+
+                                <div className="row">
+                                    <div className= "col-lg-4">
+                                        <div id="restBrief">
+                                            <ProfileInfo  data={this.state.data}/>
+                                            <Link to={menuRoute}>
+                                                <button id="showMenubut" className="btn btn-primary">SHOW MENU </button>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
-
-                        <SearchBox />
-
                     </div>
                 )
+
             } else{
+
                 return(
                     <div>
                         <NavBar username={this.state.activeUser} />
-                        <ProfileInfo  data={this.state.data}/>
 
-                        <button className="btn btn-primary" id="followbut" onClick={this.handleFollow}>Follow</button>
-                        <Link to={menuRoute}>
-                            <button id="exploreMenuButt" className="btn btn-primary">SHOW MENU </button>
-                        </Link>
+                        <div className="container-fluid"  style={{marginTop:"10%"}}>
+                            <div className="grid">
+                                <div className="row">
 
-                        <SearchBox />
+                                    <div id="followbutton">
+                                        <FollowBut data={this.state.data} followStatus= {this.state.followStatus} />
+                                    </div>
+                                </div>
+                                <div className="row">
+
+                                    <div className= "col-lg-4">
+                                        <div id="restBrief">
+                                            <ProfileInfo  data={this.state.data}/>
+                                            <Link to={menuRoute}>
+                                                <button id="showMenubut" className="btn btn-primary">SHOW MENU </button>
+                                            </Link>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 
