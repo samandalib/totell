@@ -281,19 +281,21 @@ res.redirect(route)
                 console.log(`FoundRest at getFollowCount: ${foundRest}`)
                 res.status(200).send(foundRest[0])
             })
-        /*
-} else if (req.params.name && !req.params.zip){
-            console.log("running elseif section of getFollowCount callback")
-            req.user_db.findOne({username:req.params.name}, {following:1}, (error, foundUser)=>{
-                if (error) res.status(500).send(`error in find query for followCount of User ${error}`)
-                console.log(`FoundUser at getFollowCount: ${foundUser}`)
-                res.status(200).send(foundUser[0])
-            })
         }
-*/
-    }
 
     },
 
+    getShowProfile(req,res){
+        let activeUser=this.session.user.username
+        let subjectUser=this.params.user
+        if (activeUser == subjectUser){
+            res.redirect(`/regprofile/${activeUser}`)
+        } else{
+            req.user_db({username:subjectUser}, (error, foundUser)=>{
+                if (err) res.status(500).send('Error in finding the user:',error)
+                res.status(200).send(foundUser)
+            })
+        }
+    }
 
 }

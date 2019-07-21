@@ -33,7 +33,7 @@ class ProfileInfo extends Component{
             return(
                 <div>
                     <h3 id="restaurantName">{this.props.data.name}</h3>
-                    <h5 className="info">{this.props.data.state}, {this.props.data.city} <br />
+                    <h5 className="info" style={{fontWeight:"200"}}>{this.props.data.state}, {this.props.data.city} <br />
                                             {this.props.data.address}, {this.props.data.zip}
                     </h5>
                     <p className="info"><strong>{this.props.data.type}</strong></p>

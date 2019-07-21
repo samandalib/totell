@@ -6,10 +6,11 @@ mongoose.connect("mongodb+srv://hesamandalib:hesam14239@restaurant-7f8ln.mongodb
 var Schema=mongoose.Schema;
 
 var commentsSchema= new Schema({
+    _id:{type:Schema.Types.ObjectId},
     text:{type:String},
-    user_id:{type:Number},
+    user:{type:String},
     posted_at:{type:Date, default:Date()},
-    numberOfLikes:{type:Number},
+    usersLiked:{type:Array},
 })
 
 var menuItemsSchema= new Schema({

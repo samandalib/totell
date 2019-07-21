@@ -78,6 +78,10 @@ module.exports = {
 
     },
 
+    putComment(req,res){
+        
+    }
+
 /*
     putUserFollowing(req,res){
         let user = req.session.user.username

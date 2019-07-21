@@ -25,8 +25,7 @@ class RestPageShow extends Component{
             wikidata:{}
 
         }
-        //this.handleFollow=this.handleFollow.bind(this)
-        //this.handleUnfollow = this.handleUnfollow.bind(this)
+
     }
     //CHECK TO SEE IF THE USER IN SESSION FOLLOWS THE PAGE OF THIS RESTAURANT, IT EFFECTS THE STATUS OF THE FOLLOW BUTTON
     checkFollowStatus(){
@@ -76,17 +75,6 @@ class RestPageShow extends Component{
             .catch(error => console.log('Error in Updating data:', error))
     }
 
-/*
-    getWiki(route){
-      fetch(route,{ mode: 'no-cors'})
-        .then(res =>res.json())
-         .then(data =>
-             this.setState({wikiData:data},()=>console.log('setState,WikiData', this.state.wikiData))
-          )
-    }
-
-*/
-
     componentDidMount(){
         this.checkFollowStatus()
         this.getUserInfo()
@@ -94,10 +82,6 @@ class RestPageShow extends Component{
         console.log('route to fetch after componend did mount: ', route)
         this.getPartialData(route)
         let apiUrl = "https://en.wikipedia.org/w/api.php action=query&revids=347819%7C5487%7C548945&format=jsonfm&formatversion=2"
-/*
-        this.getWiki(apiUrl)
-*/
-
     }
 
     render(){
@@ -118,7 +102,6 @@ class RestPageShow extends Component{
         }else{
 
             if (this.state.followStatus){
-                //<button className="btn btn-primary" id="unfollowbut" onClick={this.handleUnfollow}>Following</button>
                 return(
                     <div>
                         <NavBar username={this.state.activeUser} />
@@ -142,9 +125,16 @@ class RestPageShow extends Component{
                                             </Link>
                                         </div>
                                     </div>
+                                    <div className= "col-lg-4">
+
+                                    </div>
                                 </div>
 
-
+                                <div className="row">
+                                    <div className="col-lg-6">
+                                        <CommentsBox data={this.state.data} activeUser={this.state.activeUser} />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -176,6 +166,11 @@ class RestPageShow extends Component{
 
                                     </div>
 
+                                </div>
+                                <div className="row">
+                                    <div className="col-lg-6">
+                                        <CommentsBox data={this.state.data} activeUser={this.state.activeUser} />
+                                    </div>
                                 </div>
                             </div>
                         </div>
