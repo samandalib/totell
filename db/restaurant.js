@@ -10,7 +10,8 @@ var commentsSchema= new Schema({
     text:{type:String},
     user:{type:String},
     posted_at:{type:Date, default:Date()},
-    usersLiked:{type:Array},
+    Likes:{type:Array},
+    DisLikes:{type:Array},
 })
 
 var menuItemsSchema= new Schema({

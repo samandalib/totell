@@ -30,6 +30,7 @@ class App extends Component{
                     <Route exact path='/' component={Home} />
                     <Route path='/login' component={Login} />
                     <Route path = '/regprofile/:user' component ={RglrProfile} />
+                    <Route path = '/showprofile/:user' component ={RglrProfile} />
                     <Route path='/signup' component={SignUp} />
                     <Route path='/restprofile/:restname/:zip' component={RestPageShow} />
                     <Route exact path='/restshow' component={RestShow} />

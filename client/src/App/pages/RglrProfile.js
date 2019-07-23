@@ -76,16 +76,16 @@ class RglrProfile extends Component{
         let subjUserRoute = `/regprofile/${this.state.subjectUser}`
 
         if(this.state.subjectUser != this.state.activeUser){
+            console.log(`subjectUser is NOT same as activeUser: ${this.state.subjectUser} vs ${this.state.activeUser}`)
             return (
                 <div>
                     <NavBar username={this.state.activeUser} />
-                    <ShowProfile subject={this.state.subjectUser} />
-
+                    <ShowProfile subject={this.state.subjectUser} />//IT DOES NOT WORK
                 </div>
             )
 
         } else{
-
+            console.log(`subjectUser is the same as activeUser: ${this.state.subjectUser} vs ${this.state.activeUser}`)
             return (
                 <div>
                     <NavBar username={this.state.activeUser} />

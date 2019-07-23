@@ -78,9 +78,35 @@ module.exports = {
 
     },
 
-    putComment(req,res){
-        
+/*
+    postComment(req,res){
+        if (req.params.name && req.params.zip){
+            console.log("running if section of getFollowCount callback")
+
+            let restName = req.params.name
+            let restZip = req.params.zip
+            restName = new RegExp(".*"+name+".*", "i")
+            restZip = new RegExp(".*"+zip+".*", "i")
+            let restQuery = {$and:[{name:{$regex:restName}},{zip:{$regex:restZip}}]}
+
+            let commentList = []
+            let newComment = {text:req.body.commentText, user:req.session.user.username, posted_at:Date.now()}
+
+            req.restaurant_db.findOne(restQuery,(error, foundRest)=>{
+                if (error) res.status(500).send('Error in finding Restaurant for updating comments', error)
+                console.log(`foundRest at putComment ${foundRest}`)
+                foundRest.comments.push(newComment)
+                req.restaurant_db.replaceOne(restQuery, foundRest, (err, replacedRest)=>{
+                    if (err) res.status(500).send('error in replacing the restaurant', err)
+                    console.log(`replaced object at putComment ${replacedRest}`)
+                    res.state(200).send(replacedRest)
+                })
+            })
+    }else{
+        res.status(500).send('Restaurant properties are not specified correctly')
     }
+}
+*/
 
 /*
     putUserFollowing(req,res){

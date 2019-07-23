@@ -99,11 +99,13 @@ app.get('/menuform/:restaurant/:zip', callbacks.getRoutes.getRestMenu)
 app.get('/getrestbrief/:id', callbacks.getRoutes.getRestBrief)
 app.get('/getuserinfo', callbacks.getRoutes.getUserInfo)
 app.get('/getfollowcount/:name', callbacks.getRoutes.getFollowCount)
+app.get('/getlikes/:restname/:restzip', callbacks.getRoutes.getLikes)
 app.get('/showprofile/:user', callbacks.getRoutes.getShowProfile)
+app.get('/checklikestatus/:resname/:restzip/:activeuser', callbacks.getRoutes.getLikeStatus)
 /*
 app.put('/menuform/:restaurant/:zip', callbacks.putRoutes.putRestaurantMenu)
 */
-app.put('/putcomment/:restname/:restzip', callbacks.putRoutes.putComment)
+app.post('/postcomment/:restname/:restzip', callbacks.postRoutes.postComment)
 app.put('/putfollow/:restname/:restzip/:followstatus', callbacks.putRoutes.putFollow)
 /*
 app.put('/updateuserdb/:restname', callbacks.putRoutes.putUserFollowing)

@@ -1,5 +1,15 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+
+import LikeOutline from './icons/LikeOutline.jsx';
+import DislikeOutline from './icons/DislikeOutline.jsx'
+import LikeFilled from './icons/LikeFilled.jsx'
+import DislikeFilled from './icons/DislikeFilled.jsx'
+import PostComment from './PostComment.js'
+import Comment from './Comment.js'
+
 class CommentsBox extends Component{
     constructor(props){
         super(props)
@@ -7,22 +17,25 @@ class CommentsBox extends Component{
         let comments = data.comments
         this.state = {
             commentText:"",
-            commentsList:comments, updatedData:[]
+            commentsList:comments, updatedData:[],
         }
+
         this.handleChange= this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleChange(e){
         let commentText = e.target.value
         this.setState({commentText:commentText})
     }
+/*
     handleSubmit(){
         let comment = this.state.commentText
         let route = `/putcomment/${this.props.data.name}/${this.props.data.zip}`
 
         this.updateComments(route, this.props.data)
     }
+*/
+/*
     updateComments(route,data){
         fetch(route,{
             method: 'PUT',
@@ -39,11 +52,24 @@ class CommentsBox extends Component{
             )
             .catch(error => console.log(`Error in commentsList: ${error}`))
     }
+*/
 
-    componentDidMount(){
+    getLikes(){
+        let route = `/getlikes/${this.props.data.name}/${this.props.data.zip}`
+
+    }
+
+    handleLike(){
+
+    }
+    handleDisLike(){
+
     }
     render(){
-        let commentRoute = `/putcomment/${this.props.data.name}/${this.props.data.zip}`
+        let commentRoute = `/postcomment/${this.props.data.name}/${this.props.data.zip}`
+        let activeUser = this.props.activeUser
+        let restaurant = {name:this.props.data.name, zip:this.props.data.zip}
+
 
         console.log(`commentsList is : ${this.state.commentsList}`)
         if (this.state.commentsList.indexOf(this.props.activeUser)>= 0){
@@ -54,9 +80,7 @@ class CommentsBox extends Component{
                             <Link to={`/regprofile/${comment.user}`}>
                                 <p id="commentText"> <strong>{comment.user}</strong> </p>
                             </Link><br />
-                            <p>{comment.text}</p>
-                            <p>{comment.posted_at}</p>
-                            <p> {comment.usersLiked.length-1} agree with this comment </p>
+                            <Comment activeUser={activeUser} restaurant={restaurant} user={comment.user} text={comment.text} date={comment.posted_at} likes={comment.Likes} dislikes={comment.DisLikes} />
 
                         </div>
                     )
@@ -67,20 +91,10 @@ class CommentsBox extends Component{
                 <div>
                     {this.state.commentsList.map((comment)=>{
                         return(
-                            <div>
-                                <Link to={`/regprofile/${comment.user}`}>
-                                    <p id="commentText"> <strong>{comment.user}</strong></p>
-                                </Link><br />
-                                <p>{comment.text}</p>
-                                <p>{comment.posted_at}</p>
-                                <p> {comment.usersLiked.length-1} agree with this comment </p>
-                            </div>
+                            <Comment activeUser={activeUser} restaurant={restaurant} user={comment.user} text={comment.text} date={comment.posted_at} likes={comment.Likes} dislikes={comment.DisLikes} />
                         )
                     })}
-                    <form action={commentRoute} method="PUT">
-                        <textarea name="commentText" onChange={this.handleChange} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        <button type="submit">Post</button>
-                    </form>
+                    <PostComment action={this.handleChange} name={this.props.data.name} zip={this.props.data.zip}/>
                 </div>
 
             )

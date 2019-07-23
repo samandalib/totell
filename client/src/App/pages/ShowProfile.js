@@ -6,31 +6,16 @@ import SearchBox from './SearchBox.js'
 class ShowProfile extends Component{
     constructor(props){
         super(props)
-        this.state = {subjectUser:"",followings:[]}
+        //this.state={data:[]}
         this.restList = []
     }
 
-    getProfileInfo(route){
-        console.log('FROM getProfileInfo at ShowProfile.js')
+    getUserData(route){
         fetch(route)
-            .then(res => res.json(res))
-            .then(data => {
-
-                if (!data.following || data.following.length == 0){
-                    let followings = []
-                    this.setState({followings:followings})
-                }else{
-                    console.log('data following : ', data.following.length, data.following[0]._id)
-                    let followings = []
-                    for (let i=0; i<data.following.length; i++){
-                        followings.push(data.following[i]._id)
-                    }
-                    console.log(`followings in fetch: ${followings}`,typeof(followings))
-                    this.setState(
-                        {followings:followings},
-
-                    )
-                }
+            .then(res=>res.json())
+            .then(data =>{
+                console.log(`data from fetch at getUserData: ${data}`)
+                //this.setState({data:data}, ()=>console.log(`this.state.data form ShowProfile: ${this.state.data}`))
 
             })
 
@@ -39,28 +24,33 @@ class ShowProfile extends Component{
     componentDidMount(){
 
         let route = `/showprofile/${this.props.subject}`
-        this.getProfileInfo(route)
+        console.log(`route at componentDidMount at ShowProfile: ${route}`)
+        this.getUserData(route)
     }
-
-
     render(){
-        return(
-            <div>
-                <div className="container"  style={{marginTop:"10%"}}>
-                    <div className="grid">
-                        <div className="row">
-                            <SearchBox />
-                        </div>
+        console.log(`AT RENDER OF SHOWPROFILE; this.props.subject: ${this.props.subject}`)
+        //console.log(`from ShowProfile: data: ${this.state.data} , type:${typeof(this.state.data)} `)
 
-                        <div className="row">
-                            <Followings subject={this.props.subject} data={this.state.followings} showAll={0} />
-                        </div>
 
+            return(
+                <div>
+                    <div className="container"  style={{marginTop:"10%"}}>
+                        <div className="grid">
+                            <div className="row">
+                                <SearchBox />
+                            </div>
+
+                            <div className="row">
+                                <Followings subject={this.props.subject} data={this.restList} showAll={0} />
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        )
+            )
+
+
 
     }
 }

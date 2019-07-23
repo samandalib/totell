@@ -25,16 +25,16 @@ class SearchForm extends Component{//IT IS USED IN SearchBox.js
 
                 <div className="container">
                     <div className="grid">
-                        <div class="form-row align-items-center">
+                        <div className="form-row align-items-center">
 
-                            <div class="col-lg-3 my-1">
+                            <div className="col-lg-3 my-1">
                             </div>
 
-                            <div class="col-lg-6 my-1">
+                            <div className="col-lg-6 my-1">
                                 <input id="srchfield" className ="form-control" name="searchtext" id="serchBox"  onChange={this.handleChange} value={this.state.filter}  type="text"  />
                             </div>
 
-                            <div class="col-auto my-1">
+                            <div className="col-auto my-1">
                                 <button id="srchbut" className="btn btn-primary" onClick={this.handleSubmit}>search </button>
                             </div>
 

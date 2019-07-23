@@ -160,6 +160,7 @@ res.redirect(route)
 
     getRegProfile(req,res){
         let username = req.params.user
+        console.log(`username at getRegProfile: ${username}`)
         if (req.session.user){
             let sessionOwner = req.session.user.username
             console.log(`from getRegProfile username:${username}, sessionOwner:${sessionOwner}`)
@@ -179,7 +180,7 @@ res.redirect(route)
                 })
             } else{
                 console.log('from else statement')
-                res.status(400).send('You are not authorized to visit this page')
+                res.status(200).redirect(`/showprofile/${username}`)
             }
         } else{
             res.status(403).send('You are not authorized to visit this page')
@@ -286,16 +287,48 @@ res.redirect(route)
     },
 
     getShowProfile(req,res){
-        let activeUser=this.session.user.username
-        let subjectUser=this.params.user
+        let activeUser=req.session.user.username
+        let subjectUser=req.params.user
+        console.log(`from getShowProfile: activeUser:${activeUser}, subjectUser:${subjectUser}`)
         if (activeUser == subjectUser){
             res.redirect(`/regprofile/${activeUser}`)
         } else{
-            req.user_db({username:subjectUser}, (error, foundUser)=>{
-                if (err) res.status(500).send('Error in finding the user:',error)
+            req.user_db.findOne({username:subjectUser}, (error, foundUser)=>{
+                if (error) res.status(500).send('Error in finding the user:',error)
+                console.log(`foundUser at getShowProfile: ${foundUser}`)
                 res.status(200).send(foundUser)
             })
         }
+    },
+
+    getLikeStatus(req,res){
+        let activeUser = req.session.user.username
+
+        let restName = req.params.restname
+        let restZip = req.params.restzip
+        restName = new RegExp(".*"+restName+".*", "i")
+        restZip = new RegExp(".*"+restZip+".*", "i")
+        let restQuery = {$and:[{name:{$regex:restName}},{zip:{$regex:restZip}}]}
+
+        req.restaurant_db.findOne(restQuery,{comments:1}, (err,foundRest)=>{
+            if (err) res.status(500).send('There is an error in finding the restaurant, ', err)
+            res.status(200).send(foundRest)
+        })
+    },
+
+    getLikes(req,res){
+        let activeUser = req.session.user.username
+
+        let restName = req.params.restname
+        let restZip = req.params.restzip
+        restName = new RegExp(".*"+restName+".*", "i")
+        restZip = new RegExp(".*"+restZip+".*", "i")
+        let restQuery = {$and:[{name:{$regex:restName}},{zip:{$regex:restZip}}]}
+
+        req.restaurant_db.findOne(restQuery,{comments:1}, (err,foundRest)=>{
+            if (err) res.status(500).send('There is an error in finding the restaurant, ', err)
+            res.status(200).send(foundRest)
+        })
     }
 
 }

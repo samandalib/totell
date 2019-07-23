@@ -63,41 +63,69 @@ module.exports = {
     },
 
     postAddRest(req,res){
-        var newRestaurant= new req.reastaurant_db ({//changed from Restaurant to req.restaurant_db
-            name: req.body.RestName,
-            country: req.body.RestCoutnry,
-            city: req.body.RestCity,
-            address: req.body.RestAddress,
-            phone: req.body.RestPhone,
-            website: req.body.RestWeb,
-            email: req.body.RestEmail,
-            owner: req.body.RestOwner,
-            menus: [],
-        })
-        newRestaurant.save((err)=>{
-            if(err){
-                console.log(req.body.RestName);
-                res.type('html').status(500);
-                res.send('Error in Resturant Registration process: '+err);
-            }
-            else{
-                console.log(req.body.RestName);
-                console.log("record successfully saved")
-                res.send("resturant registered")
+            var newRestaurant= new req.reastaurant_db ({//changed from Restaurant to req.restaurant_db
+                name: req.body.RestName,
+                country: req.body.RestCoutnry,
+                city: req.body.RestCity,
+                address: req.body.RestAddress,
+                phone: req.body.RestPhone,
+                website: req.body.RestWeb,
+                email: req.body.RestEmail,
+                owner: req.body.RestOwner,
+                menus: [],
+            })
+            newRestaurant.save((err)=>{
+                if(err){
+                    console.log(req.body.RestName);
+                    res.type('html').status(500);
+                    res.send('Error in Resturant Registration process: '+err);
+                }
+                else{
+                    console.log(req.body.RestName);
+                    console.log("record successfully saved")
+                    res.send("resturant registered")
+
+                }
+            })
+        },
+
+        postLogOut(req,res){
+            console.log('current session: ', req.session)
+            req.session.destroy()
+            if (req.session){
+                console.log('the session is not terminated yet')
+            } else{
+                res.redirect('/')
 
             }
-        })
-    },
 
-    postLogOut(req,res){
-        console.log('current session: ', req.session)
-        req.session.destroy()
-        if (req.session){
-            console.log('the session is not terminated yet')
-        } else{
-            res.redirect('/')
+        },
 
+        postComment(req,res){
+            if (req.params.restname && req.params.restzip){
+                console.log("running if section of getFollowCount callback")
+
+                let restName = req.params.restname
+                let restZip = req.params.restzip
+                restName = new RegExp(".*"+restName+".*", "i")
+                restZip = new RegExp(".*"+restZip+".*", "i")
+                let restQuery = {$and:[{name:{$regex:restName}},{zip:{$regex:restZip}}]}
+
+                let commentList = []
+                let newComment = {text:req.body.commentText, user:req.session.user.username, posted_at:Date.now()}
+
+                req.restaurant_db.findOne(restQuery,(error, foundRest)=>{
+                    if (error) res.status(500).send('Error in finding Restaurant for updating comments', error)
+                    console.log(`foundRest at putComment ${foundRest}`)
+                    foundRest.comments.push(newComment)
+                    req.restaurant_db.replaceOne(restQuery, foundRest, (err, replacedRest)=>{
+                        if (err) res.status(500).send('error in replacing the restaurant', err)
+                        console.log(`replaced object at putComment ${replacedRest}`)
+                        res.status(200).send(replacedRest)
+                    })
+                })
+        }else{
+            res.status(500).send('Restaurant properties are not specified correctly')
         }
-
-    },
+    }
 }
