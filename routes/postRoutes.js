@@ -121,7 +121,9 @@ module.exports = {
                     req.restaurant_db.replaceOne(restQuery, foundRest, (err, replacedRest)=>{
                         if (err) res.status(500).send('error in replacing the restaurant', err)
                         console.log(`replaced object at putComment ${replacedRest}`)
-                        res.status(200).send(replacedRest)
+                        //res.status(200).send(replacedRest)
+                        res.status(200).redirect(`/restprofile/${req.params.restname}/${req.params.restzip}`)
+
                     })
                 })
         }else{

@@ -3,11 +3,13 @@ let Users = require('./user.js')
 var ObjectId = require('mongodb').ObjectId;
 
 
+/*
 Restaurant.updateMany({}, {$set:{country:"United States of America"}},(err, result)=>{
     if (err) console.log('cannot update many documents : ',err)
     console.log('updated many documents: ', result)
     process.exit()
 })
+*/
 //Restaurant.find({name:"Brick Oven Restaurant"/*Take it from url params*/}, (err,result)=>{
 //        if (err) console.log('error in find query: ', err)
 //        result[0].followers.push(ObjectId("5d233beaa3cbc73be4ff0e26"/*Take it from session*/))
@@ -58,13 +60,11 @@ Restaurant.update({name:"Sammy's Woodfired Pizza"},{$push:{followers:{username:'
 })
 */
 //var o_id = new ObjectId("5d24991b2073e362d8dca5ec");
-/*
-Users.find({"_id":ObjectId("5d25df306d017087b04056f9")}, (err,result)=>{
+Users.find({"_id":"5ce268f9a783fe2f9cf367cb"}, (err,result)=>{
     if (err) console.log('error in find:', err)
     console.log('successful query: ',result)
     process.exit(1)
 })
-*/
 
 /*
 Users.find({username:'roza'}, (err,result)=>{

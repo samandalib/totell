@@ -68,38 +68,20 @@ class CommentsBox extends Component{
     render(){
         let commentRoute = `/postcomment/${this.props.data.name}/${this.props.data.zip}`
         let activeUser = this.props.activeUser
-        let restaurant = {name:this.props.data.name, zip:this.props.data.zip}
-
-
+        let restaurant = this.props.data._id
         console.log(`commentsList is : ${this.state.commentsList}`)
-        if (this.state.commentsList.indexOf(this.props.activeUser)>= 0){
-            return(
-                this.state.commentsList.map((comment)=>{
+        return(
+            <div>
+                {this.state.commentsList.map((comment)=>{
                     return(
-                        <div>
-                            <Link to={`/regprofile/${comment.user}`}>
-                                <p id="commentText"> <strong>{comment.user}</strong> </p>
-                            </Link><br />
-                            <Comment activeUser={activeUser} restaurant={restaurant} user={comment.user} text={comment.text} date={comment.posted_at} likes={comment.Likes} dislikes={comment.DisLikes} />
-
-                        </div>
+                        <Comment activeUser={activeUser} restaurant={restaurant} id={comment._id} user={comment.user} text={comment.text} date={comment.posted_at} likes={comment.Likes} dislikes={comment.DisLikes} />
                     )
-                })
-            )
-        } else{
-            return(
-                <div>
-                    {this.state.commentsList.map((comment)=>{
-                        return(
-                            <Comment activeUser={activeUser} restaurant={restaurant} user={comment.user} text={comment.text} date={comment.posted_at} likes={comment.Likes} dislikes={comment.DisLikes} />
-                        )
-                    })}
-                    <PostComment action={this.handleChange} name={this.props.data.name} zip={this.props.data.zip}/>
-                </div>
-
-            )
-        }
+                })}
+                <PostComment action={this.handleChange} name={this.props.data.name} zip={this.props.data.zip}/>
+            </div>
+        )
     }
+
 }
 
 export default CommentsBox;

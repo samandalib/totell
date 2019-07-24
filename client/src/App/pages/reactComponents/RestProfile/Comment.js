@@ -11,7 +11,11 @@ import DislikeFilled from './icons/DislikeFilled.jsx'
 class Comment extends Component{
     constructor(props){
         super(props)
-        this.state={likeStatus:0, dislikeStatus:0}
+        let likesCount = this.props.likes.length
+        let dislikesCount = this.props.dislikes.length
+        this.state={likeStatus:0, dislikeStatus:0,
+            likesCount:likesCount, dislikesCount:dislikesCount,
+        }
 
         this.handleLike = this.handleLike.bind(this)
         this.handleDislike = this.handleDislike.bind(this)
@@ -22,26 +26,90 @@ class Comment extends Component{
         let route =`/checklikestatus/${this.props.restaurant.name}/${this.props.restaurant.zip}/${activeUser}`
     }
 
-    handleLike(initialValue){
+    handleLike(){
 
-        if (this.state.likeStatus == 0 && this.state.dislikeStatus == 0){
-            this.setState({likeStatus:1, dislikeStatus:0})
+        if (this.state.likeStatus == 0 && this.state.dislikeStatus == 0){//if the user never rate the comment before
+            this.updateLikes(1)
+            this.setState((prevState, props)=>{
+                return {likesCount:prevState.likesCount+1, likeStatus:1, dislikeStatus:0}
+            })
         } else if (this.state.likeStatus == 0 && this.state.dislikeStatus == 1){
-            this.setState({likeStatus:1, dislikeStatus:0})
+            this.updateLikes(1)
+            this.setState((prevState, props)=>{
+                return {likesCount:prevState.likesCount+1, dislikesCount:prevState.dislikesCount-1,
+                     likeStatus:1, dislikeStatus:0
+                 }
+            })
         }else{
-            this.setState({likeStatus:0, dislikeStatus:0})
+            this.updateLikes(0)
+            this.setState((prevState,props)=>{
+                return {likesCount:prevState.likesCount-1, dislikesCount:0,
+                 likeStatus:0, dislikeStatus:0}
+             })
         }
-
     }
+
+    updateLikes(like_status){
+        let comment_id = this.props.id
+        let route = `/putlikescount/${this.props.restaurant}/${comment_id}/${like_status}`
+        console.log(`route to updateLikes ${route}`)
+
+        fetch(route,{
+            method: 'PUT',
+            //body: JSON.stringify(data),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res=>{
+                res.json()
+                console.log('res at updateLikes ', res)
+            })
+            .then(data=>console.log('likes count updated on database'))
+            .catch(error=>console.log('error in updateLikes', error))
+    }
+
     handleDislike(){
         if (this.state.likeStatus == 0 && this.state.dislikeStatus == 0){
-            this.setState({likeStatus:0, dislikeStatus:1})
+            this.updateLikes(-1)
+            this.setState((prevState, props)=>{
+                return {dislikesCount:prevState.dislikesCount+1, likeStatus:0, dislikeStatus:1}
+            })
         } else if (this.state.likeStatus ==1 && this.state.dislikeStatus == 0){
-            this.setState({likeStatus:0, dislikeStatus:1})
-        }else{
-            this.setState({likeStatus:0, dislikeStatus:0})
+            this.updateLikes(-1)
+            this.setState((prevState, props)=>{
+                return {likesCount:prevState.likesCount-1, dislikesCount:prevState.dislikesCount+1,
+                     likeStatus:0, dislikeStatus:1
+                 }
+            })
+        }else if (this.state.likeStatus ==0 && this.state.dislikeStatus == 1){
+            this.updateLikes(0)
+            this.setState((prevState,props)=>{
+                 return{likesCount:0, dislikesCount:prevState.dislikesCount-1,
+                     likeStatus:0, dislikeStatus:0}
+                 })
         }
     }
+
+    updateDisLikes(dislike_status){
+        let comment_id = this.props.id
+        let route = `/putlikescount/${this.props.restaurant}/${comment_id}/${dislike_status}`
+        console.log(`route to updateDisLikes ${route}`)
+
+        fetch(route,{
+            method: 'PUT',
+            //body: JSON.stringify(data),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res=>res.json())
+            .then(data=>console.log('likes count updated on database'))
+            .catch(error=>console.log('error in updateDisLikes', error))
+    }
+
 
     setInitialState(initialValue){
         if (initialValue ==1){
@@ -53,6 +121,7 @@ class Comment extends Component{
         }
 
     }
+
     componentDidMount(){
         let initialValue
         if (this.props.likes.indexOf(this.props.activeUser)>=0){
@@ -76,8 +145,8 @@ class Comment extends Component{
                     </Link>
                     <Typography variant="body2" gutterBottom>{this.props.text}</Typography>
                     <Typography variant="caption" display="block" gutterBottom>{this.props.date}</Typography>
-                    <Typography variant="caption" display="block" gutterBottom> {this.props.likes} Likes </Typography>
-                    <Typography variant="caption" display="block" gutterBottom> {this.props.dislikes} Disikes </Typography>
+                    <Typography variant="caption" display="block" gutterBottom> {this.state.likesCount} Likes </Typography>
+                    <Typography variant="caption" display="block" gutterBottom> {this.state.dislikesCount} Disikes </Typography>
 
                     <LikeOutline action={this.handleLike} />
                     <DislikeOutline action={this.handleDislike} />
@@ -92,8 +161,8 @@ class Comment extends Component{
                     </Link>
                     <Typography variant="body2" gutterBottom>{this.props.text}</Typography>
                     <Typography variant="caption" display="block" gutterBottom>{this.props.date}</Typography>
-                    <Typography variant="caption" display="block" gutterBottom> {this.props.like} Likes </Typography>
-                    <Typography variant="caption" display="block" gutterBottom> {this.props.dislike} Disikes </Typography>
+                    <Typography variant="caption" display="block" gutterBottom> {this.state.likesCount} Likes </Typography>
+                    <Typography variant="caption" display="block" gutterBottom> {this.state.dislikesCount} Disikes </Typography>
                     <LikeFilled action={this.handleLike} />
                     <DislikeOutline action={this.handleDislike} />
                 </div>
@@ -107,8 +176,8 @@ class Comment extends Component{
                     </Link>
                     <Typography variant="body2" gutterBottom>{this.props.text}</Typography>
                     <Typography variant="caption" display="block" gutterBottom>{this.props.date}</Typography>
-                    <Typography variant="caption" display="block" gutterBottom> {this.props.like} Likes </Typography>
-                    <Typography variant="caption" display="block" gutterBottom> {this.props.dislike} Disikes </Typography>
+                    <Typography variant="caption" display="block" gutterBottom> {this.state.likesCount} Likes </Typography>
+                    <Typography variant="caption" display="block" gutterBottom> {this.state.dislikesCount} Disikes </Typography>
                     <LikeOutline action={this.handleLike} />
                     <DislikeFilled action={this.handleDislike} />
                 </div>

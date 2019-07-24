@@ -106,7 +106,9 @@ app.get('/checklikestatus/:resname/:restzip/:activeuser', callbacks.getRoutes.ge
 app.put('/menuform/:restaurant/:zip', callbacks.putRoutes.putRestaurantMenu)
 */
 app.post('/postcomment/:restname/:restzip', callbacks.postRoutes.postComment)
+
 app.put('/putfollow/:restname/:restzip/:followstatus', callbacks.putRoutes.putFollow)
+app.put('/putlikescount/:restid/:comment_id/:status', callbacks.putRoutes.putLikesCount)
 /*
 app.put('/updateuserdb/:restname', callbacks.putRoutes.putUserFollowing)
 */
