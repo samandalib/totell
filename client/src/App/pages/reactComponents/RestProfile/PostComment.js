@@ -8,8 +8,8 @@ class PostComment extends Component{
         return(
             <div>
                 <form action={commentRoute} method="POST">
-                    <input type="text" name="commentText" onChange={this.props.action} className="form-control" id="exampleFormControl" />
-                    <button type="submit">Post</button>
+                    <textarea name="commentText" onChange={this.props.action} className="form-control" id="exampleFormControl"></textarea>
+                    <button id="signupbut" className="btn btn-primary" type="submit">Post</button>
 
                 </form>
             </div>

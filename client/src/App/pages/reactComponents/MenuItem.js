@@ -2,18 +2,38 @@ import React, { Component } from 'react';
 
 import CurrencySelector from './CurrencySelector.js';
 import IngredientTooltip from './Tooltip.jsx';
+import CommentIcon from './RestProfile/icons/CommentIcon.jsx'
 
 class MenuItem extends Component{//IT IS USED IN MenuShow.js
     render(){
             return(
                   <div id="MenuItem">
-                        <ItemName name={this.props.title}/>
-                        <ItemIngredients ings={this.props.ingredients}/>
-                        <ItemPrice price={this.props.price} />
-                        <CurrencySelector />
-                        <ItemReview />
+                    <div calssName="container" style={{width:"100%"}}>
+                        <div className="row">
 
-                  </div>
+                            <div className="col-lg-2">
+                                <ItemName name={this.props.title}/>
+                            </div>
+
+                            <div className="col-lg-4">
+                                <ItemIngredients ings={this.props.ingredients}/>
+                            </div>
+
+                            <div className="col-lg-2">
+                                <ItemPrice price={this.props.price} />
+                            </div>
+
+                            <div className="col-lg-2">
+                                <CurrencySelector />
+                            </div>
+
+                            <div className="col-lg-2" style={{marginTop:"25px"}}>
+                                <ItemReview />
+                            </div>
+
+                        </div>
+                    </div>
+              </div>
             );
     }
 }
@@ -25,7 +45,7 @@ function ItemImage(props){
 }
 
 function ItemName(props){
-    return <h4 id="itemName" >{props.name}</h4>
+    return <h6 id="itemName" >{props.name}</h6>
 }
 
 function ItemIngredients(props){
@@ -50,7 +70,7 @@ function ItemPrice(props){
 }
 
 function ItemReview(props){
-    return  <button id="itemReview">Reviews</button>
+    return  <button id="itemReview"> <CommentIcon /> </button>
 }
 
 export default MenuItem;

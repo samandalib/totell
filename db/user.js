@@ -23,6 +23,7 @@ var UserSchema= new Schema({
     country:{type:String},
     dateJoined:{type:Date, default:Date.now},
     membership: {type:String},
+    photo:{ data: Buffer, contentType: String },
     following:[followingSchema],
     followers:[followersSchema],
 });

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 
 import Restaurant from './reactComponents/Restaurant.js';
+import CircularIndeterminate from './reactComponents/Waiting.js';
 
 class MenuShowPage extends Component{
     constructor(props){
@@ -25,17 +26,12 @@ class MenuShowPage extends Component{
     }
 
     render(){
-        //
-        console.log('type of data: ', typeof(this.state.data))
-        console.log('type of data.city: ', typeof(this.state.data.city))
-        console.log('type of data.menu: ', typeof(this.state.data.menu))
-
+            if (!this.state.data.name){
+                return <CircularIndeterminate />
+            }
             return(
                 <div>
-                    <p>  Menu for ... </p>
                     <Restaurant data={this.state.data} />
-
-
                 </div>
             )
 }

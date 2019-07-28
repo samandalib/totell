@@ -22,7 +22,8 @@ class RestPageShow extends Component{
 
             followStatus:0,
             activeUser:"",
-            wikidata:{}
+            wikidata:{},
+            userImage:""
 
         }
 
@@ -41,7 +42,7 @@ class RestPageShow extends Component{
         fetch(route)
             .then(res => res.json())
             .then(data => {
-                this.setState({activeUser:data.username})
+                this.setState({activeUser:data.username, userImage:data.photo})
                 console.log(`data in getUserInfo ${data.username}`)
             })
             .catch(error => console.log(`Error in getUserInfo ${error}`))
@@ -158,7 +159,7 @@ class RestPageShow extends Component{
 
                                     <div className= "col-lg-4">
                                         <div id="restBrief">
-                                            <ProfileInfo  data={this.state.data}/>
+                                            <ProfileInfo  activeUser={this.state.activeUser} data={this.state.data}/>
                                             <Link to={menuRoute}>
                                                 <button id="showMenubut" className="btn btn-primary">SHOW MENU </button>
                                             </Link>

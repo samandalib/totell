@@ -11,7 +11,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 function IngredientTooltip(props){//IT IS USED IN MenuItem.js
     return(
         <Tooltip title={props.title}>
-            <Button variant="contained" color="secondary" >
+            <Button variant="contained" color="primary" >
               {props.title}
             </Button>
       </Tooltip>

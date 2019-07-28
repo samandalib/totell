@@ -27,44 +27,7 @@ class CommentsBox extends Component{
         let commentText = e.target.value
         this.setState({commentText:commentText})
     }
-/*
-    handleSubmit(){
-        let comment = this.state.commentText
-        let route = `/putcomment/${this.props.data.name}/${this.props.data.zip}`
 
-        this.updateComments(route, this.props.data)
-    }
-*/
-/*
-    updateComments(route,data){
-        fetch(route,{
-            method: 'PUT',
-            body: JSON.stringify(data),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(res => res.json())
-            .then(data => this.setState((prevState,props)=>{
-                return {commentsList:prevState.commentsList.concat(data)}
-                })
-            )
-            .catch(error => console.log(`Error in commentsList: ${error}`))
-    }
-*/
-
-    getLikes(){
-        let route = `/getlikes/${this.props.data.name}/${this.props.data.zip}`
-
-    }
-
-    handleLike(){
-
-    }
-    handleDisLike(){
-
-    }
     render(){
         let commentRoute = `/postcomment/${this.props.data.name}/${this.props.data.zip}`
         let activeUser = this.props.activeUser

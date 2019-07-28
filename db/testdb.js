@@ -1,7 +1,18 @@
 let Restaurant = require('./restaurant.js')
 let Users = require('./user.js')
 var ObjectId = require('mongodb').ObjectId;
+const fs=require('fs')
+const path = require('path')
 
+fs.readFile(path.join(__dirname,'/default_user_photo.png'), (err, data)=>{
+    if (err) console.log('error in reading file')
+    console.log('file data read succesfully', data)
+    Users.updateOne({user:'hesam'}, {$set:{photo:data}},(err,result)=>{
+            if (err) console.log('error in updating users photos: ', err)
+            console.log('Updated users photos with default picture ', result)
+            process.exit()
+    })
+})
 
 /*
 Restaurant.updateMany({}, {$set:{country:"United States of America"}},(err, result)=>{
@@ -10,6 +21,7 @@ Restaurant.updateMany({}, {$set:{country:"United States of America"}},(err, resu
     process.exit()
 })
 */
+
 //Restaurant.find({name:"Brick Oven Restaurant"/*Take it from url params*/}, (err,result)=>{
 //        if (err) console.log('error in find query: ', err)
 //        result[0].followers.push(ObjectId("5d233beaa3cbc73be4ff0e26"/*Take it from session*/))
@@ -29,28 +41,14 @@ Restaurant.updateMany({}, {$set:{country:"United States of America"}},(err, resu
 
 //})
 
-/*
-let updatedObj = orgnlObject[0].followers.push(ObjectId("5d233beaa3cbc73be4ff0e26"))
-console.log('updatedObj: ', updatedObj)
-*/
+
 
 /*
 Restaurant.find({name:"Sammy's Woodfired Pizza"}, (err,result)=>{
     if (err) res.status(500).send('Error in find query: ', err)
     let updatedObj = result[0]
-/*
-    console.log(typeof(updatedObj._id),updatedObj._id )
-*/
-/*
-    updatedObj.followers.push(ObjectId("5d233beaa3cbc73be4ff0e26"))
-    console.log(updatedObj, typeof(updatedObj))
-    result.save((err,updatedObj)=>{
-        if (err) res.status(500).send()
-        console.log('updateObj is:', updatedObj)
-        res.send(updatedObj)
-    })
-})
-*/
+
+
 
 /*
 Restaurant.update({name:"Sammy's Woodfired Pizza"},{$push:{followers:{username:'hesam'}}},
@@ -60,11 +58,13 @@ Restaurant.update({name:"Sammy's Woodfired Pizza"},{$push:{followers:{username:'
 })
 */
 //var o_id = new ObjectId("5d24991b2073e362d8dca5ec");
+/*
 Users.find({"_id":"5ce268f9a783fe2f9cf367cb"}, (err,result)=>{
     if (err) console.log('error in find:', err)
     console.log('successful query: ',result)
     process.exit(1)
 })
+*/
 
 /*
 Users.find({username:'roza'}, (err,result)=>{

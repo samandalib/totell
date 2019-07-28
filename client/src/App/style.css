@@ -63,7 +63,15 @@
     vertical-align:middle;
 }
 
-#followbut{
+.category-title{
+    margin-bottom: 5px;
+    color:white;
+    background-color: #27AE60;
+    padding:5px;
+}
+
+.filterbut{
+    margin: 2px;
 
 }
 #unfollowbut{
@@ -71,6 +79,7 @@
     border-color: #27AE60;
     vertical-align:middle;
 }
+
 
 .resthead{
     font-size: 24px;
@@ -133,7 +142,6 @@
 
 #resturantName{
     text-transform:uppercase;
-    color:darkgray;
     font-family: "century gothic"
 }
 
@@ -143,10 +151,10 @@
 }
 #MenuItem{
     border-style: outset;
-    border-width:2px;;
+    border-width:1px;
+    border-radius: 15px;
     display:flex;
-    align-content:space-between;
-    margin:1%;
+    padding:20px;
 }
 
 #itemImage{
@@ -166,17 +174,21 @@
 #itemPrice{
     padding-left: 40px;
     padding-right: 40px;
-
+    margin-left: 100%;
 }
 
 #itemLanguage{
     padding-left: 40px;
     padding-right: 40px;
+    margin-left: 100%;
 }
 
 #itemReview{
-    padding-left: 40px;
-    padding-right: 40px;
-    align-content:flex-end;
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    background-color: white;
+    border-color: white;
+    margin-left: 100%;
 
 }

@@ -7,6 +7,7 @@ import LikeOutline from './icons/LikeOutline.jsx';
 import DislikeOutline from './icons/DislikeOutline.jsx'
 import LikeFilled from './icons/LikeFilled.jsx'
 import DislikeFilled from './icons/DislikeFilled.jsx'
+import PhotoName from '../RegProfile/PhotoName.js'
 
 class Comment extends Component{
     constructor(props){
@@ -140,16 +141,16 @@ class Comment extends Component{
         if (this.state.likeStatus == 0 && this.state.dislikeStatus == 0){
             return(
                 <div>
-                    <Link to={`/regprofile/${this.props.user}`}>
-                        <p id="commentText"> <strong>{this.props.user}</strong></p>
-                    </Link>
-                    <Typography variant="body2" gutterBottom>{this.props.text}</Typography>
-                    <Typography variant="caption" display="block" gutterBottom>{this.props.date}</Typography>
-                    <Typography variant="caption" display="block" gutterBottom> {this.state.likesCount} Likes </Typography>
-                    <Typography variant="caption" display="block" gutterBottom> {this.state.dislikesCount} Disikes </Typography>
+                  <Link to={`/regprofile/${this.props.user}`}>
+                        <PhotoName username={this.props.user} />
+                  </Link>
+                  <Typography variant="body2" gutterBottom>{this.props.text}</Typography>
+                  <Typography variant="caption" display="block" gutterBottom>{this.props.date}</Typography>
+                  <Typography variant="caption" display="block" gutterBottom> {this.state.likesCount} Likes </Typography>
+                  <Typography variant="caption" display="block" gutterBottom> {this.state.dislikesCount} Disikes </Typography>
+                  <LikeOutline action={this.handleLike} />
+                  <DislikeOutline action={this.handleDislike} />
 
-                    <LikeOutline action={this.handleLike} />
-                    <DislikeOutline action={this.handleDislike} />
                 </div>
 
             )
@@ -157,7 +158,7 @@ class Comment extends Component{
             return(
                 <div>
                     <Link to={`/regprofile/${this.props.user}`}>
-                        <p id="commentText"> <strong>{this.props.user}</strong></p>
+                        <PhotoName username={this.props.user} />
                     </Link>
                     <Typography variant="body2" gutterBottom>{this.props.text}</Typography>
                     <Typography variant="caption" display="block" gutterBottom>{this.props.date}</Typography>
@@ -172,7 +173,7 @@ class Comment extends Component{
             return (
                 <div>
                     <Link to={`/regprofile/${this.props.user}`}>
-                        <p id="commentText"> <strong>{this.props.user}</strong></p>
+                        <PhotoName username={this.props.user} />
                     </Link>
                     <Typography variant="body2" gutterBottom>{this.props.text}</Typography>
                     <Typography variant="caption" display="block" gutterBottom>{this.props.date}</Typography>

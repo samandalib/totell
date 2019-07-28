@@ -18,13 +18,13 @@ class FilteredItemsShow extends Component{
             return(
                 <div>
 
-                    <h3>{this.props.name}</h3>
+                    <h5 className="category-title">{this.props.name}</h5>
 
                     <div>
                         {this.props.items.map( (item) =>{
                             return(
                                     <div>
-                                        <MenuItem name={item.title} ingredients={item.ingredients} price={item.price} />
+                                        <MenuItem title={item.title} ingredients={item.ingredients} price={item.price} />
                                     </div>
                             )})
                         }
@@ -35,7 +35,7 @@ class FilteredItemsShow extends Component{
         } else{
             return(
                 <div>
-                    <h3>{this.props.name}</h3>
+                    <h5 className="category-title">{this.props.name}</h5>
                     <p>There is no item for this category</p>
                 </div>
             )

@@ -258,11 +258,18 @@ res.redirect(route)
     getUserInfo(req,res){
         if (req.session.user){
             let username = req.session.user.username
-            console.log(`username at getUserInfo: ${username}`)
             res.status(200).send({username:username})
         } else{
             res.status(404).send('No Active Session')
         }
+    },
+
+    getUserPhoto(req,res){
+        let username = req.params.username
+        req.user_db.findOne({username:username}, (err, foundUser)=>{
+            if (err) res.status(400).send('error in finding user for getUserPhoto')
+            res.status(200).send({userPhoto:foundUser.photo})
+        })
     },
 
     getFollowCount(req,res){

@@ -31,13 +31,13 @@ class MenuBuilderShow extends Component{//IT IS USED IN MenuForm.js
     }
     render(){
         let categoryList = this.populateCategoryList()
-        console.log('restObject: ', this.props.restaurant)
-        console.log('SEE Menu: ', this.props.restaurant.menu)
-        console.log('SEE Filter: ', this.state.filter)
-        console.log('Category Names: ', this.categoryNames)
+        //console.log('restObject: ', this.props.restaurant)
+        //console.log('SEE Menu: ', this.props.restaurant.menu)
+        //console.log('SEE Filter: ', this.state.filter)
+        //console.log('Category Names: ', this.categoryNames)
             if (this.state.filter == 'All'){
                 return(
-                    <div id="menuBuilder">
+                    <div  style={{margin:"2%"}}>
                         <MenuHeadingShow
                             handleFilter = {this.handleFilter}
                             categoryNames ={categoryList}
@@ -50,7 +50,7 @@ class MenuBuilderShow extends Component{//IT IS USED IN MenuForm.js
                         {categoryList.map((i) => {
                             return (
                                 <div>
-                                    <CategoryShow name = {i} menu = {this.props.restaurant.menu} />
+                                    <CategoryShow name={i} menu={this.props.restaurant.menu} />
                                 </div>
                             );
                         })}
@@ -60,15 +60,18 @@ class MenuBuilderShow extends Component{//IT IS USED IN MenuForm.js
 
                 return(
                     <div>
-                        <MenuHeadingShow
-                            handleFilter = {this.handleFilter}
-                            categoryNames ={categoryList}
-                            restaurant={this.props.restaurant.name}
-                            State ={this.props.restaurant.state}
-                            city={this.props.restaurant.city}
-                            address={this.props.restaurant.address}
-                            zip={this.props.restaurant.zip}
-                        />
+
+                        <div style={{margin:"2%"}}>
+                            <MenuHeadingShow
+                                handleFilter = {this.handleFilter}
+                                categoryNames ={categoryList}
+                                restaurant={this.props.restaurant.name}
+                                State ={this.props.restaurant.state}
+                                city={this.props.restaurant.city}
+                                address={this.props.restaurant.address}
+                                zip={this.props.restaurant.zip}
+                            />
+                        </div>
                         {this.props.restaurant.menu.map((i) => {
                             if (i["category"] == this.state.filter){
                                 console.log(true)

@@ -17,8 +17,10 @@
     "express": "^4.17.0",
     "express-session": "^1.16.2",
     "express-validator": "^6.1.1",
+    "fs": "0.0.1-security",
     "mongodb": "^3.2.7",
     "mongoose": "^5.5.10",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "path": "^0.12.7"
   }
 }
