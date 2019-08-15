@@ -1,12 +1,26 @@
 #main-title{
+    position:relative;
     font-family: "century gothic";
     font-size: 100px;
     font-weight: 800;
     text-align: center;
-    color:#A93226  ;
-    padding-bottom: 2%;
+    color:#A93226 ;
     padding-left: 2%;
+    margin-bottom: 0;
+    letter-spacing: 2rem;
+
 }
+
+#slogan{
+  position: relative;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color:#A93226 ;
+  letter-spacing: .4rem;
+  margin-bottom:2%;
+}
+
 
 #smalltotell{
     font-family: "century gothic";
@@ -14,14 +28,27 @@
     color:#A93226  ;
     padding-left:0px;
 }
-#loginbut{
-    background-color: #A93226;
-    border-color: #A93226;
-    margin-left: 1px
+
+.generalbut{
+
+  margin-left: 1px
 }
+#loginbut{
+    margin: 1px;
+    width:20%;
+}
+
+#loginbutHome{
+    margin: 1px;
+    width:20%;
+
+}
+#signupbutHome{
+    margin: 1px;
+    width:20%;
+}
+
 #logoutbut{
-    background-color: #A93226;
-    border-color: #A93226;
     margin-left: 1px;
     margin-top:0px;
     align-items:flex-end;
@@ -31,17 +58,20 @@
   top: 0px;
   right: 0px;
 }
+
 #signupbut{
-    background-color: #A93226;
-    border-color: #A93226;
-    margin-left: 1px
+    margin: 1px;
+    width:20%;
 }
 
-#myprofile{
-    background-color: #A93226;
-    border-color: #A93226;
-
+#homebtns{
+  display:block;
+  text-align: -webkit-center;
 }
+
+
+
+
 
 #pageheader{
     padding:1%;
@@ -58,8 +88,7 @@
 }
 
 #exploreMenuButt{
-    background-color: #A93226;
-    border-color: #A93226;
+
     vertical-align:middle;
 }
 
@@ -78,6 +107,7 @@
     background-color: #27AE60;
     border-color: #27AE60;
     vertical-align:middle;
+    color:#fff;
 }
 
 
@@ -96,8 +126,6 @@
 
 #showMenubut{
     width:100%;
-    background-color: #A93226;
-    border-color: #A93226;
 }
 #rsltunit{
 
@@ -125,8 +153,7 @@
 
 }
 #srchbut{
-    background-color: #A93226;
-    border-color: #A93226;
+
     margin-left: 1px
 }
 

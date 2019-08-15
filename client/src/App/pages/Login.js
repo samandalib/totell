@@ -57,9 +57,9 @@ class Login extends Component{
                                     <div className= "col-lg-3">
                                     </div>
                                     <div className= "col-lg-6 col-sm-12">
-                                        <input className="btn btn-primary" type='submit' value='Login' style={{backgroundColor: "#A93226", borderColor: "#A93226"}} />
+                                            <button className="btn btn-primary" type='submit' id="loginbut">Login</button>
                                         <Link to='/signup'>
-                                            <button className="btn btn-primary" style={{backgroundColor: "#A93226", borderColor: "#A93226", marginLeft:"1px"}}>Sign Up </button>
+                                            <button className="btn btn-primary" id="sigupbut">Sign Up </button>
                                         </Link>
                                     </div>
                                 </div>

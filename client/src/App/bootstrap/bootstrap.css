@@ -1868,6 +1868,7 @@ pre code {
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2420,14 +2421,14 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #A93226;
+  color: #A93226;
+  background-color: #fff;
   border-color: #A93226;
 }
 
 .btn-primary:hover {
-  color: #fff;
-  background-color: #27AE60;
+  color: #27AE60;
+  background-color: #fff;
   border-color: #27AE60;
 }
 
