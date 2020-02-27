@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 import NavBar from './reactComponents/NavBar.js'
 import SearchBox from './SearchBox.js'
 import Followings from './reactComponents/RegProfile/Followings.js'
-import Waiting from './reactComponents/Waiting.js'
 import ShowProfile from './ShowProfile.js'
 
 class RglrProfile extends Component{
@@ -79,8 +78,8 @@ class RglrProfile extends Component{
             console.log(`subjectUser is NOT same as activeUser: ${this.state.subjectUser} vs ${this.state.activeUser}`)
             return (
                 <div>
-                    <NavBar username={this.state.activeUser} />
-                    <ShowProfile subject={this.state.subjectUser} />//IT DOES NOT WORK
+                    <NavBar />
+                    <ShowProfile subject={this.state.subjectUser} />//You cannot see this page
                 </div>
             )
 
@@ -88,7 +87,7 @@ class RglrProfile extends Component{
             console.log(`subjectUser is the same as activeUser: ${this.state.subjectUser} vs ${this.state.activeUser}`)
             return (
                 <div>
-                    <NavBar username={this.state.activeUser} />
+                    <NavBar />
                     <div className="container"  style={{marginTop:"10%"}}>
                         <div className="grid">
                             <div className="row">

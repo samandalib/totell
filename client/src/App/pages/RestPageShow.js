@@ -7,7 +7,6 @@ import ProfileInfo from './reactComponents/RestProfile/ProfileInfo.js'
 import RestBoard from './reactComponents/RestProfile/RestBoard.js'
 import CommentsBox from './reactComponents/RestProfile/CommentsBox.js'
 import PhotoGallery from './reactComponents/RestProfile/PhotoGallery.js'
-import SearchBox from './SearchBox.js'
 import Waiting from './reactComponents/Waiting.js';
 
 class RestPageShow extends Component{

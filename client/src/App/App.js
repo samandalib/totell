@@ -7,19 +7,15 @@ import './bootstrap/bootstrap-grid.css';
 import './bootstrap/bootstrap-reboot.css';
 import './style.css';
 
-import RestaurantForm from './pages/RestForm';
-import RestShow from './pages/RestShow';
 import Home from './pages/Home';
-import MenuForm from './pages/MenuForm';
-import SearchBox from './pages/SearchBox.js';
-import RestMenu from './pages/reactComponents/RestMenu.js';
 import SignUp from './pages/SignUp.js';
 import Login from './pages/Login.js';
-import SearchForm from './pages/reactComponents/SearchPage/SearchForm.jsx';
-import SearchResults from './pages/reactComponents/SearchPage/SearchResults.jsx';
-import MenuShowPage from './pages/MenuShowPage.js';
-import RestPageShow from './pages/RestPageShow.js';
 import RglrProfile from './pages/RglrProfile.js';
+import RestPageShow from './pages/RestPageShow.js';
+import MenuShowPage from './pages/MenuShowPage.js';
+import RestaurantForm from './pages/RestForm';
+import MenuForm from './pages/MenuForm';
+
 
 class App extends Component{
     render(){
@@ -28,18 +24,13 @@ class App extends Component{
             <div>
                 <Switch>
                     <Route exact path='/' component={Home} />
+                    <Route path='/signup' component={SignUp} />
                     <Route path='/login' component={Login} />
                     <Route path = '/regprofile/:user' component ={RglrProfile} />
-                    <Route path = '/showprofile/:user' component ={RglrProfile} />
-                    <Route path='/signup' component={SignUp} />
                     <Route path='/restprofile/:restname/:zip' component={RestPageShow} />
-                    <Route exact path='/restshow' component={RestShow} />
-                    <Route path='/restshow/:restname' component={RestMenu} />
+                    <Route path='/menu/:restaurant/:zip' component = {MenuShowPage} />
                     <Route path='/restform' component={RestaurantForm} />
                     <Route path='/menuform/:restaurant/:zip' component = {MenuForm} />//To show the content of MenuForm Component based on params in the url
-                    <Route path='/search' component = {SearchBox} />
-                    <Route path='/searchresult' component = {SearchResults} />
-                    <Route path='/menu/:restaurant/:zip' component = {MenuShowPage} />
                     <Redirect from='/addrestaurant' to="/restform" />
                 </Switch>
             </div>

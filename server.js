@@ -45,6 +45,15 @@ app.use(session({
     saveUninitialized:false,
 }))
 
+//Deplying on Heroku
+if (process.env.NODE_ENV === 'production'){
+  app.use(express.static('client/build'));
+
+  app.get('*', (req,res)=>{
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  })
+}
+///////////////////////////////////////////////////
 function checkSignIn(req, res, next){
    if(req.session.user){
        console.log('From CheckSignIn MW: ', req.session.user)
@@ -58,7 +67,7 @@ function checkSignIn(req, res, next){
 }
 
 var {
-    PORT = 5000,
+    PORT = process.env.PORT || 5000,
 } = process.env
 
 //FOR CHECKING SESSION FUNCTIONALITY

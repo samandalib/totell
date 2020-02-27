@@ -4,7 +4,7 @@ class CommentIcon extends Component{
     render(){
         let style={
             backgroundColor:"white",
-            border: "white"
+            border:"white",
         }
         return (
             <button onClick={this.props.action} style={style}>

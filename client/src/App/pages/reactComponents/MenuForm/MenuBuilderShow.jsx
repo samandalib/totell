@@ -31,10 +31,7 @@ class MenuBuilderShow extends Component{//IT IS USED IN MenuForm.js
     }
     render(){
         let categoryList = this.populateCategoryList()
-        //console.log('restObject: ', this.props.restaurant)
-        //console.log('SEE Menu: ', this.props.restaurant.menu)
-        //console.log('SEE Filter: ', this.state.filter)
-        //console.log('Category Names: ', this.categoryNames)
+
             if (this.state.filter == 'All'){
                 return(
                     <div  style={{margin:"2%"}}>

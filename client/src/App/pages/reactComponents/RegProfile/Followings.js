@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 
 import Waiting from '../Waiting.js';
-import RestMenu from '../RestMenu.js'
+
 
 class Followings extends Component{
     constructor(props){

@@ -591,7 +591,7 @@ class CurrencySelector extends Component{
     render(){
         return(
             <select value={this.state.value} id="currency" name={this.props.currency}
-            onChange={this.handleChange} className={this.props.className}>
+                onChange={this.handleChange} className={this.props.className}>
                 {currencies.map((i)=>
                 <option value={i.abbreviation}>{i.abbreviation}</option>
                 )}

@@ -3,8 +3,19 @@ import React, { Component } from 'react';
 import CurrencySelector from './CurrencySelector.js';
 import IngredientTooltip from './Tooltip.jsx';
 import CommentIcon from './RestProfile/icons/CommentIcon.jsx'
+import ConvertedPrice from './MenuForm/ConvertedPrice'
 
 class MenuItem extends Component{//IT IS USED IN MenuShow.js
+    constructor(props){
+      super(props);
+      this.currencyConvertor=this.currencyConvertor.bind(this);
+    }
+
+    currencyConvertor(c){
+
+
+    }
+
     render(){
             return(
                   <div id="MenuItem">
@@ -20,11 +31,12 @@ class MenuItem extends Component{//IT IS USED IN MenuShow.js
                             </div>
 
                             <div className="col-lg-2">
-                                <ItemPrice price={this.props.price} />
+                                <ItemPrice price={this.props.price} currency={this.props.currency} />
+                                <ConvertedPrice />
                             </div>
 
                             <div className="col-lg-2">
-                                <CurrencySelector />
+                                <CurrencySelector action={this.currencyConvertor}/>
                             </div>
 
                             <div className="col-lg-2" style={{marginTop:"25px"}}>

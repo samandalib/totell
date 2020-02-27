@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
-
+import NavBar from './reactComponents/NavBar.js';
 import Restaurant from './reactComponents/Restaurant.js';
-import CircularIndeterminate from './reactComponents/Waiting.js';
+import Waiting from './reactComponents/Waiting.js';
 
 class MenuShowPage extends Component{
     constructor(props){
@@ -27,10 +27,12 @@ class MenuShowPage extends Component{
 
     render(){
             if (!this.state.data.name){
-                return <CircularIndeterminate />
+                return <Waiting />
             }
             return(
+
                 <div>
+                    <NavBar />
                     <Restaurant data={this.state.data} />
                 </div>
             )

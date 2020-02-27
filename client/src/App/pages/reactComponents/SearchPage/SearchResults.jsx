@@ -1,7 +1,7 @@
 import React , {Component} from 'react';
 
 import SrchRsltUnit from './SrchRsltUnit.jsx';
-import Restaurant from '../Restaurant.js';
+
 
 class SearchResults extends Component{//IT IS USED IN SearchBox.js
     render(){

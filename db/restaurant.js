@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var User = require('./user.js');
 
-mongoose.connect("mongodb+srv://hesamandalib:hesam14239@restaurant-7f8ln.mongodb.net/test?retryWrites=true",{useNewUrlParser: true})
+mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://hesamandalib:hesam14239@restaurant-7f8ln.mongodb.net/test?retryWrites=true",{useNewUrlParser: true})
 
 var Schema=mongoose.Schema;
 

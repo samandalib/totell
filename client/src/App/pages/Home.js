@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 
 import SearchBox from './SearchBox.js';
+import NavBar from './reactComponents/NavBar.js';
 
 class Home extends Component {
     render(){
@@ -12,6 +13,7 @@ class Home extends Component {
         */
         return(
             <div>
+              <NavBar/>
 
               <div className="container" style={{marginTop:"10%"}} >
                   <div className="grid">
@@ -20,21 +22,11 @@ class Home extends Component {
 
                         <div id="slogan">EXPERIENCE A WORLD WITHOUT BORDERS </div>
 
-                        <div id="homebtns">
-
-                            <Link to={'/login'}>
-                                <button className="btn btn-primary" id="loginbutHome">Log In </button>
-                            </Link>
-
-                            <Link to={'/signup'}>
-                                <button className="btn btn-primary" id="signupbutHome">Sign Up </button>
-                            </Link>
-
-                        </div>
-
 
                   </div>
               </div>
+
+              <SearchBox/>
 
 
             </div>

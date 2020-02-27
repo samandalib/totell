@@ -3,10 +3,6 @@ import {Link} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-import LikeOutline from './icons/LikeOutline.jsx';
-import DislikeOutline from './icons/DislikeOutline.jsx'
-import LikeFilled from './icons/LikeFilled.jsx'
-import DislikeFilled from './icons/DislikeFilled.jsx'
 import PostComment from './PostComment.js'
 import Comment from './Comment.js'
 
