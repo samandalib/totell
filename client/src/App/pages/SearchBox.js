@@ -33,7 +33,7 @@ class SearchBox extends Component{
     }
 
     render(){
-        console.log('from render function at SearchBox.js', this.state.srchRslt)
+        //console.log('from render function at SearchBox.js', this.state.srchRslt)
         if (!this.state.searchText){
             return (
                 <div className="container">
@@ -47,7 +47,7 @@ class SearchBox extends Component{
                 </div>
             )
 
-        } else if (!this.state.searchText && this.state.srchRslt.length==0){
+        } else if (!this.state.searchText && this.state.srchRslt.length === 0){
             return (
                 <div className="container">
                     <div className="grid">
@@ -59,7 +59,7 @@ class SearchBox extends Component{
                     </div>
                 </div>
             )
-        }else if(this.state.searchText && this.state.srchRslt.length==0){
+        }else if(this.state.searchText && this.state.srchRslt.length === 0){
             return(
                 <div className="container">
                     <div className="grid">
