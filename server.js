@@ -12,7 +12,7 @@ var ObjectId = require('mongodb').ObjectId;
 var app = express();
 
 var Store = new MongoDBStore({
-    uri:process.env.MONGODB_URI || "mongodb+srv://hesamandalib:hesam14239@restaurant-7f8ln.mongodb.net/test?retryWrites=true",
+    uri:mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://hesamandalib:hesam14239@restaurant-7f8ln.mongodb.net/test?retryWrites=true",{useNewUrlParser: true})
     collection: 'Sessions'
 })
 Store.on('error', (error)=> console.log('error in connection to store/sessions collection:', error))
