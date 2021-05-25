@@ -5,7 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.4",
     "@material-ui/icons": "^4.9.1",
-    "browserslist": "^4.9.0",
+    "browserslist": "^4.16.5",
     "caniuse-lite": "^1.0.30001030",
     "material-ui-popup-state": "^1.4.0",
     "react": "^16.13.0",
