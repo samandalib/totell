@@ -12,10 +12,10 @@
   "author": "Hesam Andalib",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.1",
     "connect-mongodb-session": "^2.2.0",
     "ejs": "^2.6.1",
-    "express": "^4.17.0",
+    "express": "^4.18.2",
     "express-session": "^1.16.2",
     "express-validator": "^6.1.1",
     "fs": "0.0.1-security",
